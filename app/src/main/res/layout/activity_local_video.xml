@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@color/colorPrimary"
         android:elevation="4dp">
         <ImageView
             android:id="@+id/local_video_selector_back"
@@ -26,7 +26,9 @@
             android:textSize="18sp"
             android:textColor="@color/textColorPrimaryLight"
             android:text="@string/video_selector_title"
-            android:layout_centerInParent="true"/>
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/title_start_spacing"/>
 
         <TextView
             android:id="@+id/local_video_selector_next"
@@ -42,10 +44,10 @@
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/local_video_selector_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

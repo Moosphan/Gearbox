@@ -1,17 +1,18 @@
 package com.moosphon.g2v
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.moosphon.g2v.base.Configs
 import com.moosphon.g2v.engine.image.loader.ImageLoader
 import com.moosphon.g2v.page.LocalPictureActivity
+import com.moosphon.g2v.page.VideoPreviewActivity
 import com.moosphon.g2v.util.applyViewGone
 import com.moosphon.g2v.util.getColorResource
 import com.moosphon.g2v.util.loge
@@ -20,37 +21,27 @@ import com.otaliastudios.gif.GIFCompressor
 import com.otaliastudios.gif.GIFListener
 import com.ucard.timeory.loader.image.loader.LoadOptions
 import kotlinx.android.synthetic.main.activity_main.*
-import org.greenrobot.eventbus.Logger
 import org.jetbrains.anko.intentFor
-import android.widget.Toast
-import com.blankj.utilcode.util.FileUtils
-import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
-import java.io.File
+import permissions.dispatcher.*
 import java.io.IOException
 
-
+@RuntimePermissions
 class MainActivity : AppCompatActivity() {
 
     companion object {
         const val RC_GIF_BEHAVIOR = 223
     }
     private var mGifPath: String = ""
-    private val mVideoPath: String by lazy {
-        // Create a temporary file for output.
-        val filePath = Configs.VIDEO_DIR + System.currentTimeMillis().toString() + ".mp4"
-        FileUtils.createOrExistsFile(filePath)
-
-        filePath
-    }
+    private var mVideoPath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        initialize()
+        initializeWithPermissionCheck()
     }
 
-    private fun initialize() {
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun initialize() {
         selectBtn.setOnClickListener {
             startActivityForResult(
                 intentFor<LocalPictureActivity>(),
@@ -65,6 +56,29 @@ class MainActivity : AppCompatActivity() {
                 transformGifToVideo()
             }
         }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // NOTE: delegate the permission handling to generated function
+        onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+
+    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onRecordingDenied(){
+        ToastUtils.showShort("您拒绝了本次存储权限，将无法正常使用本功能")
+    }
+
+    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onRecordingNeverAskAgain(){
+        ToastUtils.showShort("您已拒绝授权，后续不再提醒")
+    }
+
+    @Suppress("unused")
+    @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onRecordingOfRationale(request: PermissionRequest){
+        //showRationaleDialog(R.string.video_record_permission_rationale, request)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -84,7 +98,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        gif2VideoBtn.setBackgroundColor(getColorResource(R.color.colorAccent))
+        val shapeDrawable = gif2VideoBtn.background as GradientDrawable
+        shapeDrawable.setColor(getColorResource(R.color.colorAccent))
         gif2VideoBtn.setTextColor(getColorResource(R.color.textColorPrimaryLight))
         previewBox.background = null
         previewBox.setBackgroundColor(getColorResource(R.color.colorBackground))
@@ -105,12 +120,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun transformGifToVideo() {
-
-        GIFCompressor.into(mVideoPath)
+        //todo: 通过加载动画来过渡，提升用户体验
+        videoPreviewProgressBar.applyViewGone(false)
+        createVideoFile()
+        GIFCompressor.into(mVideoPath!!)
             .addDataSource(this, mGifPath)
             .setListener(object : GIFListener {
                 override fun onGIFCompressionFailed(exception: Throwable) {
                     loge("转换失败了>>>>>>> ${exception.message}")
+                    videoPreviewProgressBar.applyViewGone(true)
                 }
 
                 override fun onGIFCompressionProgress(progress: Double) {
@@ -119,12 +137,27 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onGIFCompressionCompleted() {
                     loge("转换成功>>>>>>>>$mVideoPath")
+                    videoPreviewProgressBar.applyViewGone(true)
                     ToastUtils.showShort("转换成功")
+                    navigateTo<VideoPreviewActivity>(
+                        "videoPath" to mVideoPath
+                    )
                 }
 
                 override fun onGIFCompressionCanceled() {
+                    videoPreviewProgressBar.applyViewGone(true)
                 }
 
             }).compress()
+    }
+
+    private fun createVideoFile() {
+        val filePath = Configs.APP_DIR + Configs.VIDEO_DIR + System.currentTimeMillis().toString() + ".mp4"
+        try {
+            FileUtils.createOrExistsFile(filePath)
+        }catch (e: IOException) {
+            loge("创建失败，原因在于：$e")
+        }
+        mVideoPath = filePath
     }
 }

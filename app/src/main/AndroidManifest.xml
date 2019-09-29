@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.moosphon.g2v">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".G2VideoApplication"
@@ -17,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/G2VideoTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +25,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".page.LocalPictureActivity"
-            android:screenOrientation="portrait"/>
         <provider
             android:name=".provider.SystemPictureFileProvider"
             android:authorities="${applicationId}.system.fileProvider"
@@ -36,6 +34,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity
+            android:name=".page.LocalPictureActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".page.VideoPreviewActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

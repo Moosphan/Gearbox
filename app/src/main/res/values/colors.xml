@@ -18,6 +18,7 @@
     <color name="textShadowColor">@color/black800</color>
     <color name="holder_color">#5C161A29</color>
     <color name="holder_dash_color">#6BDB486C</color>
+    <color name="button_unselected_color">#D15B78</color>
 
     <color name="textColorPrimaryLight">#ffffff</color>  <!-- 100%-->
     <color name="textColorSecondaryLight">#B3FFFFFF</color>  <!-- 70%-->

@@ -34,4 +34,6 @@
 
     <dimen name="bottom_sheet_elevation">8dp</dimen>
     <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+
+    <dimen name="title_start_spacing">68dp</dimen>
 </resources>

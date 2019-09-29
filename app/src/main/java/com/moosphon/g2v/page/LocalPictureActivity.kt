@@ -3,6 +3,7 @@ package com.moosphon.g2v.page
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -18,6 +19,7 @@ import com.moosphon.g2v.R
 import com.moosphon.g2v.adapter.LocalImageAdapter
 import com.moosphon.g2v.selector.ImageMediaEntity
 import com.moosphon.g2v.selector.MediaUtils
+import com.moosphon.g2v.util.getColorResource
 import com.moosphon.g2v.widget.MediaItemDecoration
 import kotlinx.android.synthetic.main.activity_local_picture.*
 import permissions.dispatcher.*
@@ -90,9 +92,13 @@ class LocalPictureActivity : AppCompatActivity() {
                     //选中
                     currentPicture = pictureData!![position].path
                     if (!currentPicture.isNullOrEmpty()) {
+                        val drawable = GradientDrawable()
+                        drawable.setColor(getColorResource(R.color.colorAccent))
+                        drawable.cornerRadius = ConvertUtils.dp2px(26F).toFloat()
+                        local_picture_selector_next.background = drawable
                         local_picture_selector_next.setTextColor(
                             ContextCompat.getColor(this@LocalPictureActivity,
-                                R.color.colorAccent))
+                                R.color.textColorPrimaryLight))
                         local_picture_selector_next.isEnabled = true
                     }
                 }else {

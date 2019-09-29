@@ -27,7 +27,9 @@
             android:textSize="18sp"
             android:textColor="@color/textColorPrimaryLight"
             android:text="@string/image_selector_title"
-            android:layout_centerInParent="true"/>
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/title_start_spacing"/>
 
         <TextView
             android:id="@+id/local_picture_selector_next"
@@ -39,7 +41,6 @@
             android:textStyle="bold"
             android:text="@string/next"
             android:padding="6dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"/>
     </RelativeLayout>

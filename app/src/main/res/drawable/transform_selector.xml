@@ -10,7 +10,7 @@
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/card_corner_super"/>
-            <solid android:color="@color/holder_dash_color"/>
+            <solid android:color="@color/button_unselected_color"/>
         </shape>
     </item>
 </selector>
