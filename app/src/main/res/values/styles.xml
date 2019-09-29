@@ -1,0 +1,95 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+
+    <!-- activity themes config -->
+    <style name="G2VideoTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textColorHint">@color/textColorHint</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="toolbarStyle">@style/Widget.Sight.ToolBar</item>
+    </style>
+
+    <!-- translucent theme -->
+    <style name="Sight.TranslucentTheme" parent="G2VideoTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <!-- widget themes -->
+
+    <style name="Widget.G2Video" parent="android:Widget.Material"/>
+
+
+    <!-- toolbar theme (fix the problem of appcompat v24 toolbar and after v24 has space bug after navigation icon)-->
+    <style name="Widget.Sight.ToolBar" parent="Base.Widget.AppCompat.Toolbar">
+<!--        <item name="contentInsetStart">0dp</item>-->
+<!--        <item name="contentInsetStartWithNavigation">0dp</item>-->
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:elevation">@dimen/card_z_normal</item>
+        <item name="android:titleMarginStart" tools:targetApi="n">@dimen/margin_normal</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Sight.ToolBar</item>
+    </style>
+
+    <style name="TextAppearance.Sight.ToolBar" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+    </style>
+
+    <!-- base textView as button style theme -->
+    <style name="Widget.G2Video.TextButton">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:minHeight">?listPreferredItemHeightSmall</item>
+        <item name="android:paddingTop">@dimen/spacing_normal</item>
+        <item name="android:paddingBottom">@dimen/spacing_normal</item>
+        <item name="android:paddingStart">?listPreferredItemPaddingStart</item>
+        <item name="android:paddingEnd">?listPreferredItemPaddingEnd</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textAppearance">?textAppearanceBody2</item> <!-- 14sp -->
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- base image button as accessibility suggests -->
+    <style name="Widget.Sight.Base.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">@dimen/ic_min_touch_area</item>
+        <item name="android:layout_height">@dimen/ic_min_touch_area</item>
+        <item name="android:background">?android:selectableItemBackgroundBorderless</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="Widget.Sight.Base.ImageButton.Small">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+    </style>
+
+    <!-- text above image cover, need special style e.g. shadows -->
+    <style name="TextAppearance.Sight.CoverText" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/colorTextOnImage</item>
+        <item name="android:shadowColor">@color/textShadowColor</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="TextAppearance.Sight.CoverTitle" parent="TextAppearance.Sight.CoverText">
+        <item name="android:textColor">@color/colorTitleOnImage</item>
+        <item name="fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_size_h2</item>
+    </style>
+
+
+</resources>

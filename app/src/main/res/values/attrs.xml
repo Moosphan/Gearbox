@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="item.checkView.background.startColor" format="color|reference"/>
+    <attr name="item.checkView.background.endColor" format="color|reference"/>
+    <attr name="item.checkView.border.color" format="color|reference"/>
+</resources>

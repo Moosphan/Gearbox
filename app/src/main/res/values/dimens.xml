@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common dimensions -->
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="spacing_large">12dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+
+    <dimen name="text_size_h1">22sp</dimen>
+    <dimen name="text_size_h2">20sp</dimen>
+    <dimen name="text_size_h3">18sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_micro">12sp</dimen>
+
+    <dimen name="card_z_none">0dp</dimen>
+    <dimen name="card_z_low">2dp</dimen>
+    <dimen name="card_z_normal">6dp</dimen>
+    <dimen name="card_z_high">12dp</dimen>
+
+    <dimen name="card_corner_small">4dp</dimen>
+    <dimen name="card_corner_normal">10dp</dimen>
+    <dimen name="card_corner_big">16dp</dimen>
+    <dimen name="card_corner_super">26dp</dimen>
+
+    <dimen name="item_decoration_little">2dp</dimen>
+    <dimen name="item_decoration_small">6dp</dimen>
+    <dimen name="item_decoration_normal">10dp</dimen>
+    <dimen name="item_decoration_large">16dp</dimen>
+
+    <dimen name="ic_min_touch_area">48dp</dimen> <!-- as android accessibility suggests -->
+
+    <dimen name="bottom_sheet_elevation">8dp</dimen>
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+</resources>

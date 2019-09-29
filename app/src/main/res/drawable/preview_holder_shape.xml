@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/holder_color"/>
+    <corners android:radius="@dimen/card_corner_big"/>
+    <stroke android:dashGap="@dimen/margin_normal"
+        android:color="@color/holder_dash_color"
+        android:dashWidth="@dimen/margin_small"
+        android:width="1dp"/>
+</shape>

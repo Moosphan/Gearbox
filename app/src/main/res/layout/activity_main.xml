@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        style="@style/Widget.Sight.ToolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name" />
+
+    <FrameLayout
+        android:id="@+id/previewBox"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/preview_holder_shape"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <FrameLayout
+            android:id="@+id/selectBtn"
+            android:layout_width="@dimen/ic_min_touch_area"
+            android:layout_height="@dimen/ic_min_touch_area"
+            android:layout_gravity="center"
+            android:background="@drawable/select_btn_shape">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add_a_photo_black_24dp"/>
+        </FrameLayout>
+        <ImageView
+            android:id="@+id/gifPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/gif2VideoBtn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transform_selector"
+        android:padding="10dp"
+        android:text="GIF 转视频"
+        android:textColor="@color/textColorHintLight"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previewBox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
