@@ -44,7 +44,7 @@ class LocalPictureActivity : AppCompatActivity() {
                         val activity = mActivity.get()
                         if (activity != null){
                             if(activity.pictureData == null || activity.pictureData?.size!! == 0){
-                                ToastUtils.showShort("本地没有图片资源,请选择其它方式")
+                                ToastUtils.showShort("本地没有GIF图片资源")
                             } else {
                                 activity.adapter.setData(activity.pictureData!!)
                                 activity.localPictureRecyclerView.adapter = activity.adapter

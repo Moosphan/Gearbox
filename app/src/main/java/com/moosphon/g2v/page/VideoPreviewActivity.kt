@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_video_preview.*
 
 class VideoPreviewActivity : AppCompatActivity() {
 
-    var mTransformedVideo: String = ""
+    private var mTransformedVideo: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

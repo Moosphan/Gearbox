@@ -19,7 +19,7 @@
     <FrameLayout
         android:id="@+id/previewBox"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="360dp"
         android:background="@drawable/preview_holder_shape"
         android:layout_marginStart="22dp"
         android:layout_marginTop="124dp"
@@ -30,21 +30,21 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
         <FrameLayout
             android:id="@+id/selectBtn"
-            android:layout_width="@dimen/ic_min_touch_area"
-            android:layout_height="@dimen/ic_min_touch_area"
+            android:layout_width="@dimen/ic_large_touch_area"
+            android:layout_height="@dimen/ic_large_touch_area"
             android:layout_gravity="center"
             android:background="@drawable/select_btn_shape">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/ic_min_touch_area"
+                android:layout_height="@dimen/ic_min_touch_area"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_add_a_photo_black_24dp"/>
         </FrameLayout>
         <ImageView
             android:id="@+id/gifPreview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitCenter"/>
     </FrameLayout>
 
     <Button
@@ -54,7 +54,7 @@
         android:background="@drawable/transform_shape"
         android:padding="10dp"
         android:elevation="@dimen/card_z_normal"
-        android:text="GIF 转视频"
+        android:text="@string/gif_to_video"
         android:textColor="@color/textColorHintLight"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

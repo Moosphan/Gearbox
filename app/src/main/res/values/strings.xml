@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">GifToVideo</string>
+    <string name="app_name">Dorae</string>
+    <string name="gif_to_video">GIF转视频</string>
+    <string name="video_to_gif">视频转GIF</string>
     <string name="next">下一步</string>
     <string name="image_selector_title">选择一张GIF动图</string>
     <string name="video_selector_title">选择一个视频</string>
