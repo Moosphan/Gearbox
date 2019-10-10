@@ -17,7 +17,6 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back_black_24dp"
             android:padding="6dp"
-            android:tint="@color/ic_color_enable_light"
             android:layout_marginStart="12dp"
             android:layout_centerVertical="true"/>
         <TextView

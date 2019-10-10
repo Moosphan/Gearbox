@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.moosphon.g2v.R
 import com.moosphon.g2v.adapter.LocalImageAdapter
+import com.moosphon.g2v.base.BaseActivity
 import com.moosphon.g2v.selector.ImageMediaEntity
 import com.moosphon.g2v.selector.MediaUtils
 import com.moosphon.g2v.util.getColorResource
@@ -31,7 +32,7 @@ import java.lang.ref.WeakReference
  * @date 2019.06.03
  */
 @RuntimePermissions
-class LocalPictureActivity : AppCompatActivity() {
+class LocalPictureActivity : BaseActivity() {
     companion object {
         const val GET_LOCAL_IMAGES: Int = 100
         private class WithoutLeakHandler( activity: LocalPictureActivity) : Handler(){
@@ -93,7 +94,7 @@ class LocalPictureActivity : AppCompatActivity() {
                     currentPicture = pictureData!![position].path
                     if (!currentPicture.isNullOrEmpty()) {
                         val drawable = GradientDrawable()
-                        drawable.setColor(getColorResource(R.color.colorAccent))
+                        drawable.setColor(getColorResource(R.color.colorPrimary))
                         drawable.cornerRadius = ConvertUtils.dp2px(26F).toFloat()
                         local_picture_selector_next.background = drawable
                         local_picture_selector_next.setTextColor(

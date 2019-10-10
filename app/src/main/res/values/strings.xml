@@ -1,10 +1,169 @@
-<resources>
-    <string name="app_name">Dorae</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">G2Video</string>
+    <string name="author_name">神户</string>
     <string name="gif_to_video">GIF转视频</string>
     <string name="video_to_gif">视频转GIF</string>
+    <string name="change_gif">更换GIF</string>
     <string name="next">下一步</string>
+    <string name="more">更多</string>
     <string name="image_selector_title">选择一张GIF动图</string>
     <string name="video_selector_title">选择一个视频</string>
     <string name="video_preview">视频预览</string>
     <string name="share_string">分享</string>
+    <string name="about_me">关于我</string>
+    <string name="about_dorae">关于哆啦</string>
+    <string name="about_me_desc">
+        Dorae 是什么？你可以将其理解为哆啦A梦的"百宝袋"，尽管现在还太过简陋，但梦想的起点总是简单的呀≧◠◡◠≦✌️。于我而言，它代表的是一种生活态度和精神：解放大脑，提高价值生产效率，空余更多时间来专注于自己感兴趣或者更加有意义的事情。希望本应用能够在生活中帮助到你，哪怕帮您节省了一分钟的时间，那么它的价值就是非凡的。欢迎提供一些宝贵意见，只要接近了梦想，我将不遗余力。
+    </string>
+    <string name="about_g2v_desc">提供对图片视频方面进行特殊处理的小工具。\n每天前进一小步。</string>
+    <string name="open_source_allowed">开源许可</string>
+    <string name="provide_suggestion">意见反馈</string>
+    <string name="develop_plan">开发计划</string>
+    <string name="code_repository">代码仓库</string>
+    <string name="donation_support">友情捐赠</string>
+    <string name="contact_me">联系我</string>
+    <string name="contact_me_email_info">联系我 👉 moosphon@gmail.com</string>
+    <string name="develop_plan_content">
+        \n
+         • 优化GIF转视频的交互和页面\n
+         • 增加高级配置，实现多张GIF转换\n
+         • 视频转GIF图片格式\n
+         • 视频区域裁剪\n
+    </string>
+    <string name="clip_content_android">Android</string>
+    <string name="clip_content_hack">Growth Hack</string>
+    <string name="clip_content_freedom">Freedom</string>
+    <string name="author_desc">一位来自魔都的头脑"极客"(颤抖)。\n热爱思考🤔，喜欢瞎折腾，\n虽然结果不一定都是完美的，\n但我喜欢探索的过程︿(￣︶￣)︿。</string>
+    <string name="develop_plan_title">开发计划</string>
+
+    <string name="license_glide" tools:ignore="TypographyOther">
+        Glide\n
+        Copyright 2014 Google, Inc. All rights reserved.\n
+
+        Redistribution and use in source and binary forms, with or without modification, are
+        permitted provided that the following conditions are met:\n
+
+           1. Redistributions of source code must retain the above copyright notice, this list of
+                 conditions and the following disclaimer.\n
+
+           2. Redistributions in binary form must reproduce the above copyright notice, this list
+                 of conditions and the following disclaimer in the documentation and/or other materials
+                 provided with the distribution.\n
+
+        THIS SOFTWARE IS PROVIDED BY GOOGLE, INC. ``AS IS\'\' AND ANY EXPRESS OR IMPLIED
+        WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+        FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GOOGLE, INC. OR
+        CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+        CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+        ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+        NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+        ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+        The views and conclusions contained in the software and documentation are those of the
+        authors and should not be interpreted as representing official policies, either expressed
+        or implied, of Google, Inc.\n
+        ----------------------------------------\n
+        License for third_party/disklrucache:\n
+
+        Copyright 2012 Jake Wharton\n
+        Copyright 2011 The Android Open Source Project\n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.\n
+        ----------------------------------------\n
+        License for third_party/gif_decoder:\n
+
+        Copyright (c) 2013 Xcellent Creations, Inc.\n
+
+        Permission is hereby granted, free of charge, to any person obtaining
+        a copy of this software and associated documentation files (the
+        "Software"), to deal in the Software without restriction, including
+        without limitation the rights to use, copy, modify, merge, publish,
+        distribute, sublicense, and/or sell copies of the Software, and to
+        permit persons to whom the Software is furnished to do so, subject to
+        the following conditions:\n
+
+        The above copyright notice and this permission notice shall be
+        included in all copies or substantial portions of the Software.\n
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+        MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+        LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+        OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+        WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n
+        ----------------------------------------\n
+        License for third_party/gif_encoder/AnimatedGifEncoder.java and
+        third_party/gif_encoder/LZWEncoder.java:\n
+
+        No copyright asserted on the source code of this class. May be used for any
+        purpose, however, refer to the Unisys LZW patent for restrictions on use of
+        the associated LZWEncoder class. Please forward any corrections to
+        kweiner@fmsware.com.\n
+
+        ----------------------------------------\n
+        License for third_party/gif_encoder/NeuQuant.java\n
+
+        Copyright (c) 1994 Anthony Dekker\n
+
+        NEUQUANT Neural-Net quantization algorithm by Anthony Dekker, 1994. See
+        "Kohonen neural networks for optimal colour quantization" in "Network:
+        Computation in Neural Systems" Vol. 5 (1994) pp 351-367. for a discussion of
+        the algorithm.\n
+
+        Any party obtaining a copy of these files from the author, directly or
+        indirectly, is granted, free of charge, a full and unrestricted irrevocable,
+        world-wide, paid up, royalty-free, nonexclusive right and license to deal in
+        this software and documentation files (the "Software"), including without
+        limitation the rights to use, copy, modify, merge, publish, distribute,
+        sublicense, and/or sell copies of the Software, and to permit persons who
+        receive copies from any such party to do so, with the only requirement being
+        that this copyright notice remain intact.\n
+    </string>
+    
+    <string name="license_android_utils">
+        AndroidUtilsCode\n
+        Copyright 2017 Blankj\n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n
+
+            http://www.apache.org/licenses/LICENSE-2.0\n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.\n
+    </string>
+
+    <string name="license_permission_dispatcher">
+        PermissionsDispatcher\n
+        Copyright 2016 Shintaro Katafuchi, Marcel Schnelle, Yoshinori Isogai\n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n
+
+            http://www.apache.org/licenses/LICENSE-2.0\n
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.\n
+    </string>
+
 </resources>

@@ -19,6 +19,7 @@
     <dimen name="card_z_low">2dp</dimen>
     <dimen name="card_z_normal">6dp</dimen>
     <dimen name="card_z_high">12dp</dimen>
+    <dimen name="toolbar_elevation">5dp</dimen>
 
     <dimen name="card_corner_small">4dp</dimen>
     <dimen name="card_corner_normal">10dp</dimen>

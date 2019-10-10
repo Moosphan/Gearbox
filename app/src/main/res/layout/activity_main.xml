@@ -10,6 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        app:menu="@menu/nav_menu"
         style="@style/Widget.Sight.ToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,22 +22,22 @@
         android:layout_width="match_parent"
         android:layout_height="360dp"
         android:background="@drawable/preview_holder_shape"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="124dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginEnd="@dimen/margin_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
         <FrameLayout
             android:id="@+id/selectBtn"
-            android:layout_width="@dimen/ic_large_touch_area"
-            android:layout_height="@dimen/ic_large_touch_area"
+            android:layout_width="@dimen/ic_min_touch_area"
+            android:layout_height="@dimen/ic_min_touch_area"
             android:layout_gravity="center"
             android:background="@drawable/select_btn_shape">
             <ImageView
-                android:layout_width="@dimen/ic_min_touch_area"
-                android:layout_height="@dimen/ic_min_touch_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_add_a_photo_black_24dp"/>
         </FrameLayout>
@@ -44,6 +45,7 @@
             android:id="@+id/gifPreview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:scaleType="fitCenter"/>
     </FrameLayout>
 
@@ -55,7 +57,7 @@
         android:padding="10dp"
         android:elevation="@dimen/card_z_normal"
         android:text="@string/gif_to_video"
-        android:textColor="@color/textColorHintLight"
+        android:textColor="@color/textColorSecondaryLight"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

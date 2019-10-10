@@ -3,14 +3,14 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/card_corner_super"/>
-            <solid android:color="@color/colorAccent"/>
+            <solid android:color="#1A73E8"/>
         </shape>
     </item>
 
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/card_corner_super"/>
-            <solid android:color="@color/button_unselected_color"/>
+            <solid android:color="@color/colorPrimary"/>
         </shape>
     </item>
 </selector>

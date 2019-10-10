@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/G2VideoTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity"
+        <activity android:name=".page.OpenSourceLicenseActivity"></activity>
+        <activity android:name=".page.AboutMeActivity" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,9 +41,9 @@
         <activity
             android:name=".page.LocalPictureActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".page.VideoPreviewActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".page.VideoPreviewActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

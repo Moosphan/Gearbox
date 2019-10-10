@@ -6,17 +6,15 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.moosphon.g2v.base.BaseActivity
 import com.moosphon.g2v.base.Configs
 import com.moosphon.g2v.engine.image.loader.ImageLoader
+import com.moosphon.g2v.page.AboutMeActivity
 import com.moosphon.g2v.page.LocalPictureActivity
 import com.moosphon.g2v.page.VideoPreviewActivity
-import com.moosphon.g2v.util.applyViewGone
-import com.moosphon.g2v.util.getColorResource
-import com.moosphon.g2v.util.loge
-import com.moosphon.g2v.util.navigateTo
+import com.moosphon.g2v.util.*
 import com.otaliastudios.gif.GIFCompressor
 import com.otaliastudios.gif.GIFListener
 import com.ucard.timeory.loader.image.loader.LoadOptions
@@ -26,7 +24,7 @@ import permissions.dispatcher.*
 import java.io.IOException
 
 @RuntimePermissions
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     companion object {
         const val RC_GIF_BEHAVIOR = 223
@@ -42,6 +40,13 @@ class MainActivity : AppCompatActivity() {
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun initialize() {
+        toolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.about) {
+                navigateTo<AboutMeActivity>()
+            }
+            true
+        }
+
         selectBtn.setOnClickListener {
             startActivityForResult(
                 intentFor<LocalPictureActivity>(),
@@ -52,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             if (mGifPath.isEmpty()) {
                 ToastUtils.showShort("请先从本地选择一张GIF")
             } else {
-                ToastUtils.showShort("准备将GIF转为视频格式")
+                //ToastUtils.showShort("准备将GIF转为视频格式")
                 transformGifToVideo()
             }
         }
@@ -99,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI() {
         val shapeDrawable = gif2VideoBtn.background as GradientDrawable
-        shapeDrawable.setColor(getColorResource(R.color.colorAccent))
+        shapeDrawable.setColor(getColorResource(R.color.colorPrimary))
         gif2VideoBtn.setTextColor(getColorResource(R.color.textColorPrimaryLight))
         previewBox.background = null
         previewBox.setBackgroundColor(getColorResource(R.color.colorBackground))

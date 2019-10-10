@@ -1,15 +1,14 @@
 package com.moosphon.g2v.page
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.moosphon.g2v.R
+import com.moosphon.g2v.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_video_preview.*
 
 
-
-class VideoPreviewActivity : AppCompatActivity() {
+class VideoPreviewActivity : BaseActivity() {
 
     private var mTransformedVideo: String = ""
 
@@ -38,6 +37,10 @@ class VideoPreviewActivity : AppCompatActivity() {
         }
 
         videoPreviewBack.setOnClickListener { finish() }
+
+        videoPreviewSaveBtn.setOnClickListener {
+            ToastUtils.showShort("已保存至 $mTransformedVideo")
+        }
     }
 
     private fun setUpVideo() {
@@ -48,7 +51,8 @@ class VideoPreviewActivity : AppCompatActivity() {
         }
 
         videoPreviewPlayer.setOnCompletionListener {
-            stopPlaybackVideo()
+            //stopPlaybackVideo()
+            playVideo()
         }
 
         videoPreviewPlayer.setOnErrorListener { mediaPlayer, what, extra ->

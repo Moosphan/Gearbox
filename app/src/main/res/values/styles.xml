@@ -35,14 +35,14 @@
     <style name="Widget.Sight.ToolBar" parent="Base.Widget.AppCompat.Toolbar">
 <!--        <item name="contentInsetStart">0dp</item>-->
 <!--        <item name="contentInsetStartWithNavigation">0dp</item>-->
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:elevation">@dimen/card_z_normal</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
         <item name="android:titleMarginStart" tools:targetApi="n">@dimen/margin_normal</item>
         <item name="titleTextAppearance">@style/TextAppearance.Sight.ToolBar</item>
     </style>
 
     <style name="TextAppearance.Sight.ToolBar" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/textColorPrimaryLight</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:textSize">@dimen/text_size_h2</item>
         <item name="android:fontFamily">sans-serif-condensed-medium</item>
     </style>
@@ -57,7 +57,8 @@
         <item name="android:paddingStart">?listPreferredItemPaddingStart</item>
         <item name="android:paddingEnd">?listPreferredItemPaddingEnd</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">?textAppearanceBody2</item> <!-- 14sp -->
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
@@ -91,5 +92,9 @@
         <item name="android:textSize">@dimen/text_size_h2</item>
     </style>
 
+    <style name="TextAppearance.Sight.NormalText" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/textColorSecondary</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
 
 </resources>
