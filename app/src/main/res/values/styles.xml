@@ -17,6 +17,10 @@
         <item name="toolbarStyle">@style/Widget.Sight.ToolBar</item>
     </style>
 
+    <style name="G2VideoTheme.Splash">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+
     <!-- translucent theme -->
     <style name="Sight.TranslucentTheme" parent="G2VideoTheme">
         <item name="android:windowContentOverlay">@null</item>
@@ -33,8 +37,8 @@
 
     <!-- toolbar theme (fix the problem of appcompat v24 toolbar and after v24 has space bug after navigation icon)-->
     <style name="Widget.Sight.ToolBar" parent="Base.Widget.AppCompat.Toolbar">
-<!--        <item name="contentInsetStart">0dp</item>-->
-<!--        <item name="contentInsetStartWithNavigation">0dp</item>-->
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:elevation">@dimen/toolbar_elevation</item>
         <item name="android:titleMarginStart" tools:targetApi="n">@dimen/margin_normal</item>
@@ -76,6 +80,35 @@
         <item name="android:layout_height">28dp</item>
     </style>
 
+    <style name="Widget.Sight" parent="@android:style/Widget.Material"/>
+
+
+    <!-- filter chip -->
+    <style name="Widget.Sight.Tag">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:lines">1</item>
+        <item name="android:textAppearance">@style/TextAppearance.Sight.Tag</item>
+    </style>
+
+    <style name="Widget.Sight.Tag.Inline">
+        <item name="android:drawablePadding">@dimen/spacing_micro</item>
+        <item name="android:drawableStart">@drawable/tag_dot</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="Widget.Sight.FilterChip">
+        <item name="android:letterSpacing">@dimen/tag_letter_spacing</item>
+        <item name="android:padding">@dimen/spacing_normal</item>
+        <item name="android:strokeColor">@color/clip_border</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="outlineWidth">1dp</item>
+        <item name="clearIcon">@drawable/ic_cancel_black_24dp</item>
+        <item name="foreground">?selectableItemBackground</item>
+        <item name="showIcons">true</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
     <!-- text above image cover, need special style e.g. shadows -->
     <style name="TextAppearance.Sight.CoverText" parent="@style/TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/colorTextOnImage</item>
@@ -95,6 +128,12 @@
     <style name="TextAppearance.Sight.NormalText" parent="@style/TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/textColorSecondary</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="TextAppearance.Sight.Tag" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:letterSpacing">@dimen/tag_letter_spacing</item>
+        <item name="fontFamily">monospace</item>
     </style>
 
 </resources>

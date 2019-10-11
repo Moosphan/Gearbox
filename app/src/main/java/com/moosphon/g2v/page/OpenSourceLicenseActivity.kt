@@ -1,6 +1,5 @@
 package com.moosphon.g2v.page
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.moosphon.g2v.R
 import com.moosphon.g2v.base.BaseActivity
@@ -15,4 +14,6 @@ class OpenSourceLicenseActivity : BaseActivity() {
             onBackPressed()
         }
     }
+
+    override fun applyDefaultStatusStyle(): Boolean = true
 }

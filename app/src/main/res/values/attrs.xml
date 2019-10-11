@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="item.checkView.background.startColor" format="color|reference"/>
-    <attr name="item.checkView.background.endColor" format="color|reference"/>
-    <attr name="item.checkView.border.color" format="color|reference"/>
+
+
+    <declare-styleable name="Theme">
+        <!-- Navigation bar divider color, used by NavigationBarContentFrameLayout -->
+        <attr name="ioschedNavigationBarDividerColor" format="color" />
+
+        <attr name="colorControlLight" format="color" />
+
+        <attr name="sessionListKeyline" format="dimension" />
+
+        <attr name="filterChipViewStyle" format="reference" />
+
+        <attr name="eventCardHeaderBackground" format="reference|color" />
+        <attr name="item.checkView.background.startColor" format="color|reference"/>
+        <attr name="item.checkView.background.endColor" format="color|reference"/>
+        <attr name="item.checkView.border.color" format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="FilterChipView">
+        <attr name="android:checked" />
+        <attr name="android:text" />
+        <attr name="android:textColor" />
+        <attr name="android:textSize" />
+        <attr name="android:color" />
+        <attr name="android:padding" />
+        <attr name="android:strokeColor" />
+        <attr name="android:letterSpacing" />
+        <attr name="outlineWidth" format="dimension" />
+        <attr name="clearIcon" format="reference" />
+        <attr name="foreground" format="reference" />
+        <attr name="showIcons" format="boolean" />
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
 </resources>

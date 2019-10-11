@@ -68,6 +68,8 @@ class LocalPictureActivity : BaseActivity() {
         searchForLocalPicturesWithPermissionCheck()
     }
 
+    override fun applyDefaultStatusStyle(): Boolean = true
+
     private fun initView() {
         local_picture_selector_next.isEnabled = false
         local_picture_selector_back.setOnClickListener{

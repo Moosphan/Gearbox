@@ -38,4 +38,6 @@
     <dimen name="bottom_sheet_corner_radius">16dp</dimen>
 
     <dimen name="title_start_spacing">68dp</dimen>
+    <item name="tag_letter_spacing" type="dimen" format="float">-0.06</item>
+    <dimen name="tag_dot_size">12dp</dimen>
 </resources>

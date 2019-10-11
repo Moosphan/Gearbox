@@ -10,7 +10,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        style="@style/Widget.Sight.ToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -104,6 +103,13 @@
                 android:drawableStart="@drawable/ic_mail_outline_black_24dp"
                 android:text="@string/contact_me"/>
 
+            <TextView
+                android:id="@+id/aboutAppVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.G2Video.TextButton"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="14sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -16,8 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/G2VideoTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".page.OpenSourceLicenseActivity"></activity>
-        <activity android:name=".page.AboutMeActivity" />
+        <activity android:name=".page.OpenSourceLicenseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".page.AboutMeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

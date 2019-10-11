@@ -19,6 +19,8 @@ class VideoPreviewActivity : BaseActivity() {
         initialize()
     }
 
+    override fun applyDefaultStatusStyle(): Boolean = true
+
     private fun initialize() {
         if (!TextUtils.isEmpty(intent.getStringExtra("videoPath"))) {
             mTransformedVideo = intent.getStringExtra("videoPath")!!

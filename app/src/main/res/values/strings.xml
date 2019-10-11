@@ -1,11 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">G2Video</string>
+    <string name="app_name">咚次</string>
     <string name="author_name">神户</string>
     <string name="gif_to_video">GIF转视频</string>
     <string name="video_to_gif">视频转GIF</string>
     <string name="change_gif">更换GIF</string>
     <string name="next">下一步</string>
     <string name="more">更多</string>
+    <string name="filter">参数配置</string>
     <string name="image_selector_title">选择一张GIF动图</string>
     <string name="video_selector_title">选择一个视频</string>
     <string name="video_preview">视频预览</string>
@@ -15,7 +16,7 @@
     <string name="about_me_desc">
         Dorae 是什么？你可以将其理解为哆啦A梦的"百宝袋"，尽管现在还太过简陋，但梦想的起点总是简单的呀≧◠◡◠≦✌️。于我而言，它代表的是一种生活态度和精神：解放大脑，提高价值生产效率，空余更多时间来专注于自己感兴趣或者更加有意义的事情。希望本应用能够在生活中帮助到你，哪怕帮您节省了一分钟的时间，那么它的价值就是非凡的。欢迎提供一些宝贵意见，只要接近了梦想，我将不遗余力。
     </string>
-    <string name="about_g2v_desc">提供对图片视频方面进行特殊处理的小工具。\n每天前进一小步。</string>
+    <string name="about_g2v_desc">提供图片及视频方面特殊需求的小工具。\n每天前进一小步。</string>
     <string name="open_source_allowed">开源许可</string>
     <string name="provide_suggestion">意见反馈</string>
     <string name="develop_plan">开发计划</string>
@@ -35,6 +36,27 @@
     <string name="clip_content_freedom">Freedom</string>
     <string name="author_desc">一位来自魔都的头脑"极客"(颤抖)。\n热爱思考🤔，喜欢瞎折腾，\n虽然结果不一定都是完美的，\n但我喜欢探索的过程︿(￣︶￣)︿。</string>
     <string name="develop_plan_title">开发计划</string>
+    <string name="version_holder">Version %1$s</string>
+
+
+    <!-- resource for gif output options chip -->
+    <string name="a11y_filter_applied" translation_description="Alternative text when an GIF option filter is applies">%1s filter applied</string>
+    <string name="a11y_filter_not_applied" translation_description="Alternative text when an option filter is not applies">%1s filter not applied</string>
+
+    <string name="category_header_frame_rate">帧率</string>
+    <string name="category_header_resolution">分辨率</string>
+    <string name="category_header_aspect_ratio">纵横比</string>
+    <string name="category_header_rotation">角度</string>
+    <string name="category_header_speed">播放速率</string>
+
+
+
+
+
+
+
+
+
 
     <string name="license_glide" tools:ignore="TypographyOther">
         Glide\n

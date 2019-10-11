@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.moosphon.g2v.widget.FilterChipView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/filter_chip"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?listPreferredItemHeightSmall"
+    android:color="@color/ic_color_enable"
+    app:showIcons="true"
+    android:text="50%"
+    app:cornerRadius="@dimen/spacing_large"/>

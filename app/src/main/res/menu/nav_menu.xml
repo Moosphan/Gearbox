@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:id="@+id/first">
+        <item android:id="@+id/filter"
+            android:title="@string/filter"
+            android:icon="@drawable/ic_filter_list_black_24dp"
+            android:tooltipText="@string/filter"
+            app:showAsAction="always"
+            tools:ignore="UnusedAttribute" />
         <item android:id="@+id/about"
             android:title="@string/more"
             android:icon="@drawable/ic_more_black_24dp"

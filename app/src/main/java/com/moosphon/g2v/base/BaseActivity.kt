@@ -8,6 +8,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ScreenUtils.applyStatusBarStyle(this)
+        if (applyDefaultStatusStyle()) {
+            ScreenUtils.applyStatusBarStyle(this)
+        }
     }
+
+    abstract fun applyDefaultStatusStyle() : Boolean
 }

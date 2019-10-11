@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.moosphon.g2v.base.BaseActivity
 import com.moosphon.g2v.base.Configs
+import com.moosphon.g2v.dialog.LottieAnimationDialog
 import com.moosphon.g2v.engine.image.loader.ImageLoader
 import com.moosphon.g2v.page.AboutMeActivity
 import com.moosphon.g2v.page.LocalPictureActivity
@@ -23,17 +24,25 @@ import org.jetbrains.anko.intentFor
 import permissions.dispatcher.*
 import java.io.IOException
 
+/**
+ * home page for app.
+ */
 @RuntimePermissions
 class MainActivity : BaseActivity() {
-
-    companion object {
-        const val RC_GIF_BEHAVIOR = 223
+    override fun applyDefaultStatusStyle(): Boolean {
+        return false
     }
+
     private var mGifPath: String = ""
     private var mVideoPath: String? = null
+    private val mLoadingDialog: LottieAnimationDialog by lazy {
+        LottieAnimationDialog(this, "loading-google-style.json")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.G2VideoTheme)
+        ScreenUtils.applyStatusBarStyle(this)
         setContentView(R.layout.activity_main)
         initializeWithPermissionCheck()
     }
@@ -41,8 +50,9 @@ class MainActivity : BaseActivity() {
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun initialize() {
         toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.about) {
-                navigateTo<AboutMeActivity>()
+            when(it.itemId) {
+                R.id.about  -> navigateTo<AboutMeActivity>()
+                R.id.filter -> displayOptionsDialog()
             }
             true
         }
@@ -61,6 +71,13 @@ class MainActivity : BaseActivity() {
                 transformGifToVideo()
             }
         }
+    }
+
+    /**
+     * display filter options for gif compressor output.
+     */
+    private fun displayOptionsDialog() {
+        //todo: show bottom dialog with clips
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -92,7 +109,7 @@ class MainActivity : BaseActivity() {
             if (requestCode == RC_GIF_BEHAVIOR) {
                 val gifPath = data?.extras?.getString("localPicturePath")
                 if (TextUtils.isEmpty(gifPath)) {
-                    loge("选择gif返回出错了>>>>>>")
+                    return
                 } else {
                     mGifPath = gifPath!!
                     updateUI()
@@ -125,24 +142,20 @@ class MainActivity : BaseActivity() {
     }
 
     private fun transformGifToVideo() {
-        //todo: 通过加载动画来过渡，提升用户体验
-        videoPreviewProgressBar.applyViewGone(false)
+        mLoadingDialog.startLoading()
         createVideoFile()
         GIFCompressor.into(mVideoPath!!)
             .addDataSource(this, mGifPath)
             .setListener(object : GIFListener {
                 override fun onGIFCompressionFailed(exception: Throwable) {
-                    loge("转换失败了>>>>>>> ${exception.message}")
-                    videoPreviewProgressBar.applyViewGone(true)
+                    mLoadingDialog.cancelLoading()
                 }
 
                 override fun onGIFCompressionProgress(progress: Double) {
-                    loge("当前转换的进度：$progress")
                 }
 
                 override fun onGIFCompressionCompleted() {
-                    loge("转换成功>>>>>>>>$mVideoPath")
-                    videoPreviewProgressBar.applyViewGone(true)
+                    mLoadingDialog.cancelLoading()
                     ToastUtils.showShort("转换成功")
                     navigateTo<VideoPreviewActivity>(
                         "videoPath" to mVideoPath
@@ -150,7 +163,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 override fun onGIFCompressionCanceled() {
-                    videoPreviewProgressBar.applyViewGone(true)
+                    mLoadingDialog.cancelLoading()
                 }
 
             }).compress()
@@ -164,5 +177,9 @@ class MainActivity : BaseActivity() {
             loge("创建失败，原因在于：$e")
         }
         mVideoPath = filePath
+    }
+
+    companion object {
+        const val RC_GIF_BEHAVIOR = 223
     }
 }

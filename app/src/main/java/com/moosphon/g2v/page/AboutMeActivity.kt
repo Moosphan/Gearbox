@@ -19,6 +19,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Handler
 import com.blankj.utilcode.util.ToastUtils
+import com.moosphon.g2v.BuildConfig
 import com.moosphon.g2v.R
 import com.moosphon.g2v.base.Configs
 import com.moosphon.g2v.util.applyViewGone
@@ -27,6 +28,7 @@ import java.net.URLEncoder
 
 
 class AboutMeActivity : BaseActivity() {
+    override fun applyDefaultStatusStyle(): Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,10 @@ class AboutMeActivity : BaseActivity() {
     }
 
     private fun initialize() {
+
+        val version = BuildConfig.VERSION_NAME
+        aboutAppVersion.text = String.format(getString(R.string.version_holder), version)
+
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -68,7 +74,7 @@ class AboutMeActivity : BaseActivity() {
             Handler().postDelayed({
                 aboutAppContactMe.text = getString(R.string.contact_me)
             },
-            3000)
+            2000)
         }
 
     }
@@ -109,7 +115,6 @@ class AboutMeActivity : BaseActivity() {
             e.printStackTrace()
             false
         }
-
     }
 
 
@@ -139,7 +144,6 @@ class AboutMeActivity : BaseActivity() {
             e.printStackTrace()
             false
         }
-
     }
 
     private fun giveSuggestion(

@@ -1,6 +1,10 @@
 package com.moosphon.g2v.util
 
 import android.graphics.Rect
+import android.os.Build
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -126,4 +130,45 @@ fun View.requestApplyInsetsWhenAttached() {
             override fun onViewDetachedFromWindow(v: View) = Unit
         })
     }
+}
+
+fun View.isRtl() = layoutDirection == View.LAYOUT_DIRECTION_RTL
+
+/**
+ * Calculated the widest line in a [StaticLayout].
+ */
+fun StaticLayout.textWidth(): Int {
+    var width = 0f
+    for (i in 0 until lineCount) {
+        width = width.coerceAtLeast(getLineWidth(i))
+    }
+    return width.toInt()
+}
+
+fun newStaticLayout(
+    source: CharSequence,
+    paint: TextPaint,
+    width: Int,
+    alignment: Layout.Alignment,
+    spacingmult: Float,
+    spacingadd: Float,
+    includepad: Boolean
+): StaticLayout {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        StaticLayout.Builder.obtain(source, 0, source.length, paint, width).apply {
+            setAlignment(alignment)
+            setLineSpacing(spacingadd, spacingmult)
+            setIncludePad(includepad)
+        }.build()
+    } else {
+        @Suppress("DEPRECATION")
+        StaticLayout(source, paint, width, alignment, spacingmult, spacingadd, includepad)
+    }
+}
+
+/**
+ * Linearly interpolate between two values.
+ */
+fun lerp(a: Float, b: Float, t: Float): Float {
+    return a + (b - a) * t
 }
