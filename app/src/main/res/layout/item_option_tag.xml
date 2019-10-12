@@ -2,11 +2,11 @@
 <com.moosphon.g2v.widget.FilterChipView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/filter_chip"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minHeight="?listPreferredItemHeightSmall"
     android:color="@color/ic_color_enable"
+    android:strokeColor="@color/clip_border"
     app:showIcons="true"
     android:text="50%"
-    app:cornerRadius="@dimen/spacing_large"/>
+    app:cornerRadius="@dimen/spacing_normal"/>

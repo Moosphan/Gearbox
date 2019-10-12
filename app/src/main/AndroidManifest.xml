@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/G2VideoTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".page.OpenSourceLicenseActivity"
+        <activity android:name=".ui.OpenSourceLicenseActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".page.AboutMeActivity"
+        <activity android:name=".ui.AboutMeActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
@@ -41,10 +41,10 @@
         </provider>
 
         <activity
-            android:name=".page.LocalPictureActivity"
+            android:name=".ui.LocalPictureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".page.VideoPreviewActivity"
+            android:name=".ui.VideoPreviewActivity"
             android:screenOrientation="portrait" />
     </application>
 

@@ -6,16 +6,19 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.moosphon.g2v.base.BaseActivity
 import com.moosphon.g2v.base.Configs
 import com.moosphon.g2v.dialog.LottieAnimationDialog
 import com.moosphon.g2v.engine.image.loader.ImageLoader
-import com.moosphon.g2v.page.AboutMeActivity
-import com.moosphon.g2v.page.LocalPictureActivity
-import com.moosphon.g2v.page.VideoPreviewActivity
+import com.moosphon.g2v.ui.AboutMeActivity
+import com.moosphon.g2v.ui.GifConfigurationFragment
+import com.moosphon.g2v.ui.LocalPictureActivity
+import com.moosphon.g2v.ui.VideoPreviewActivity
 import com.moosphon.g2v.util.*
+import com.moosphon.g2v.widget.BottomSheetBehavior
 import com.otaliastudios.gif.GIFCompressor
 import com.otaliastudios.gif.GIFListener
 import com.ucard.timeory.loader.image.loader.LoadOptions
@@ -38,6 +41,7 @@ class MainActivity : BaseActivity() {
     private val mLoadingDialog: LottieAnimationDialog by lazy {
         LottieAnimationDialog(this, "loading-google-style.json")
     }
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +75,17 @@ class MainActivity : BaseActivity() {
                 transformGifToVideo()
             }
         }
+
+        // set up bottom sheet
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.gifArgumentSheet))
+
     }
 
     /**
      * display filter options for gif compressor output.
      */
     private fun displayOptionsDialog() {
-        //todo: show bottom dialog with clips
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

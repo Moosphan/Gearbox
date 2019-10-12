@@ -100,13 +100,13 @@
         <item name="android:letterSpacing">@dimen/tag_letter_spacing</item>
         <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:strokeColor">@color/clip_border</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
         <item name="android:textSize">14sp</item>
         <item name="outlineWidth">1dp</item>
         <item name="clearIcon">@drawable/ic_cancel_black_24dp</item>
         <item name="foreground">?selectableItemBackground</item>
         <item name="showIcons">true</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">@dimen/card_corner_normal</item>
     </style>
 
     <!-- text above image cover, need special style e.g. shadows -->

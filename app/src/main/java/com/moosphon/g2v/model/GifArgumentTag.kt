@@ -7,7 +7,7 @@ import com.moosphon.g2v.R
 /**
  * Entity model for Gif argument to display chip tags.
  */
-sealed class GifArgumentTag(val isChecked: Boolean) {
+sealed class GifArgumentTag(var isChecked: Boolean) {
 
     enum class GifArgumentCategory(@StringRes val labelResId: Int) {
         NONE(0),
@@ -25,10 +25,10 @@ sealed class GifArgumentTag(val isChecked: Boolean) {
     abstract fun getFilterCategory(): GifArgumentCategory
 
     /** Return the background color when filled. */
-    abstract fun getColor(): Int
+    abstract fun getColor(): String
 
     /** Return a color to use when the filter is selected, or TRANSPARENT to use the default. */
-    open fun getSelectedTextColor(): Int = Color.TRANSPARENT
+    open fun getSelectedTextColor(): String = "#00000000"
 
     /** Return a string resource to display, or 0 to use the value of [getText]. */
     open fun getTextResId(): Int = 0
@@ -42,27 +42,8 @@ sealed class GifArgumentTag(val isChecked: Boolean) {
     /** Return a short string string to display when [getShortTextResId] returns 0. */
     open fun getShortText(): String = ""
 
-    /** Filter for user's starred and reserved events. */
-    class MyEventsFilter(isChecked: Boolean) : GifArgumentTag(isChecked) {
-
-        override fun getFilterCategory(): GifArgumentCategory = GifArgumentCategory.NONE
-
-        override fun getColor(): Int = Color.parseColor("#4768fd") // @color/indigo
-
-        override fun getSelectedTextColor(): Int = Color.WHITE
-
-        override fun getTextResId(): Int = /*R.string.starred_and_reserved*/ 0
-
-        override fun getShortTextResId(): Int = /*R.string.starred_and_reserved_short*/ 0
-
-        override fun equals(other: Any?): Boolean = other is MyEventsFilter
-
-        // This class isn't used for a key for a collection, overriding hashCode for removing a
-        // lint warning
-        override fun hashCode(): Int {
-            return javaClass.hashCode()
-        }
-    }
+    /** Return a value of float to change configs. */
+    open fun getValue(): Float = 0f
 
     /** Filter options for gif config tags. */
     class TagFilter(val tag: Tag, isChecked: Boolean) : GifArgumentTag(isChecked) {
@@ -78,15 +59,17 @@ sealed class GifArgumentTag(val isChecked: Boolean) {
             }
         }
 
-        override fun getColor(): Int = tag.color
+        override fun getColor(): String = tag.color
 
-        override fun getSelectedTextColor(): Int = tag.fontColor ?: super.getSelectedTextColor()
+        override fun getSelectedTextColor(): String = tag.fontColor ?: super.getSelectedTextColor()
 
         override fun getTextResId(): Int = 0
         override fun getShortTextResId(): Int = 0
 
         override fun getText(): String = tag.displayName
         override fun getShortText(): String = tag.displayName
+
+        override fun getValue(): Float = tag.value
 
         /** Only the tag is used for equality. */
         override fun equals(other: Any?) =

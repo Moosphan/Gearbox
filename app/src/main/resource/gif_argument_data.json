@@ -1,0 +1,147 @@
+{
+  "tags" : [
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-742959fa80e0",
+      "category" : "Frame rate",
+      "displayName" : "20fps",
+      "value" : 20,
+      "color" : "#4768FD",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-74718fu19113",
+      "category" : "Frame rate",
+      "displayName" : "30fps(默认)",
+      "value" : 30,
+      "color" : "#4768FD",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-g8ag9g116666",
+      "category" : "Frame rate",
+      "displayName" : "60fps",
+      "value" : 60,
+      "color" : "#4768FD",
+      "fontColor" : "#202124"
+    },
+
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-74284931ud11",
+      "category" : "Aspect ratio",
+      "displayName" : "默认",
+      "value" : 0,
+      "color" : "#574DDD",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-742849owfof5",
+      "category" : "Aspect ratio",
+      "displayName" : "1:1",
+      "value" : 1,
+      "color" : "#574DDD",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7430dagag389",
+      "category" : "Aspect ratio",
+      "displayName" : "3:4",
+      "value" : 0.75,
+      "color" : "#574DDD",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7430sa3tu115",
+      "category" : "Aspect ratio",
+      "displayName" : "9:16",
+      "value" : 0.5625,
+      "color" : "#574DDD",
+      "fontColor" : "#202124"
+    },
+
+
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7432fuaga000",
+      "category" : "Rotation",
+      "displayName" : "0°",
+      "value" : 0,
+      "color" : "#94DD6B",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7432aatu0a11",
+      "category" : "Rotation",
+      "displayName" : "90°",
+      "value" : 90,
+      "color" : "#94DD6B",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7432aagag999",
+      "category" : "Rotation",
+      "displayName" : "180°",
+      "value" : 180,
+      "color" : "#94DD6B",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7432saf75731",
+      "category" : "Rotation",
+      "displayName" : "270°",
+      "value" : 270,
+      "color" : "#94DD6B",
+      "fontColor" : "#202124"
+    },
+
+
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7436sa989fa",
+      "category" : "Speed",
+      "displayName" : "0.5x",
+      "value" : 0.5,
+      "color" : "#FD9127",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7436a8s90fd",
+      "category" : "Speed",
+      "displayName" : "1x",
+      "value" : 1,
+      "color" : "#FD9127",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7436sif2930",
+      "category" : "Speed",
+      "displayName" : "2x",
+      "value" : 2,
+      "color" : "#FD9127",
+      "fontColor" : "#202124"
+    },
+
+
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7460r9uff11",
+      "category" : "Resolution",
+      "displayName" : "1x",
+      "value" : 1,
+      "color" : "#999999",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-74603989fj3",
+      "category" : "Resolution",
+      "displayName" : "0.75x",
+      "value" : 0.75,
+      "color" : "#999999",
+      "fontColor" : "#202124"
+    },
+    {
+      "id" : "1446ffe1-aa35-4a05-9fd6-7460a9g3115",
+      "category" : "Resolution",
+      "displayName" : "0.5x",
+      "value" : 0.5,
+      "color" : "#999999",
+      "fontColor" : "#202124"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-package com.moosphon.g2v.page
+package com.moosphon.g2v.ui
 
 import android.Manifest
 import android.app.Activity
@@ -10,7 +10,6 @@ import android.os.Message
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.ConvertUtils

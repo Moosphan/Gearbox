@@ -7,6 +7,8 @@
     <string name="next">下一步</string>
     <string name="more">更多</string>
     <string name="filter">参数配置</string>
+    <string name="close_filter_config">关闭配置栏</string>
+    <string name="reset">重置</string>
     <string name="image_selector_title">选择一张GIF动图</string>
     <string name="video_selector_title">选择一个视频</string>
     <string name="video_preview">视频预览</string>

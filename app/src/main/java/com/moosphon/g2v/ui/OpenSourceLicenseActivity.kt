@@ -1,4 +1,4 @@
-package com.moosphon.g2v.page
+package com.moosphon.g2v.ui
 
 import android.os.Bundle
 import com.moosphon.g2v.R

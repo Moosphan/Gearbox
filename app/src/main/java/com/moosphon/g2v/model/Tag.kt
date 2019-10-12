@@ -19,18 +19,6 @@ data class Tag(
     val category: String,
 
     /**
-     * Tag name. For example, "topic_iot", "type_afterhours", "topic_ar&vr", etc. Used to resolve
-     * references to this tag from other entities during data deserialization and normalization.
-     * For UI, use [displayName] instead.
-     */
-    val tagName: String,
-
-    /**
-     * This tag's order within its [category].
-     */
-    val orderInCategory: Int,
-
-    /**
      * Display name within a category. For example, "Android", "Ads", "Design".
      */
     val displayName: String,
@@ -38,21 +26,26 @@ data class Tag(
     /**
      * The color associated with this tag as a color integer.
      */
-    val color: Int,
+    val color: String,
 
     /**
      * The text color associated with this tag as a color integer.
      */
-    val fontColor: Int? = null
+    val fontColor: String? = null,
+
+    /**
+     * The value for tag needs to get.
+     */
+    val value: Float
 ) {
 
     companion object {
         /** Category value for gif argument tags */
-        const val CATEGORY_FRAME_RATE   = "gif_frame_rate"
-        const val CATEGORY_RESOLUTION   = "gif_resolution"
-        const val CATEGORY_ASPECT_RATIO = "gif_aspect_ratio"
-        const val CATEGORY_ROTATION     = "gif_rotation"
-        const val CATEGORY_SPEED        = "gif_play_speed"
+        const val CATEGORY_FRAME_RATE   = "Frame rate"
+        const val CATEGORY_RESOLUTION   = "Resolution"
+        const val CATEGORY_ASPECT_RATIO = "Aspect ratio"
+        const val CATEGORY_ROTATION     = "Rotation"
+        const val CATEGORY_SPEED        = "Speed"
 
 
 
