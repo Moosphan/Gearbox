@@ -10,19 +10,20 @@ import androidx.core.view.marginBottom
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.moosphon.g2v.MainActivity
 import com.moosphon.g2v.R
 import com.moosphon.g2v.adapter.OptionFilterAdapter
 import com.moosphon.g2v.adapter.OptionFilterSpanSizeLookup
 import com.moosphon.g2v.model.GifArgumentTag
 import com.moosphon.g2v.model.Tag
 import com.moosphon.g2v.model.data.GifArgumentTagDataSource
-import com.moosphon.g2v.util.doOnApplyWindowInsets
-import com.moosphon.g2v.util.inflateView
+import com.moosphon.g2v.util.*
 import com.moosphon.g2v.widget.BottomSheetBehavior
 import com.moosphon.g2v.widget.BottomSheetBehavior.Companion.STATE_COLLAPSED
 import com.moosphon.g2v.widget.BottomSheetBehavior.Companion.STATE_HIDDEN
 import com.moosphon.g2v.widget.FilterChipView
 import kotlinx.android.synthetic.main.fragment_gif_arguments_config.*
+import kotlin.math.log
 
 /**
  * Fragment to display gif configuration arguments like a bottom sheet dialog.
@@ -35,6 +36,7 @@ class GifConfigurationFragment : Fragment() {
     }
 
     private lateinit var behavior: BottomSheetBehavior<*>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,14 +57,15 @@ class GifConfigurationFragment : Fragment() {
                 OptionFilterSpanSizeLookup(filterAdapter)
         }
 
-        /*
-        // 访问父activity的view层的时候需要在 onActivityCreated 方法里面
-        view?.let { parent ->
+
+        // todo: 访问父activity的view层的时候需要在 onActivityCreated 方法里面,，为何filterSheetContainer为空？
+        /*view?.let { parent ->
             behavior = BottomSheetBehavior.from(parent.findViewById(R.id.filterSheetContainer))
-        }
+        }*/
 
         // Update the peek and margins so that it scrolls and rests within sys ui
-
+        behavior = (requireActivity() as MainActivity).bottomSheetBehavior
+        behavior.state = STATE_HIDDEN
         val peekHeight = behavior.peekHeight
         val marginBottom = view?.marginBottom
 
@@ -73,11 +76,25 @@ class GifConfigurationFragment : Fragment() {
 
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = marginBottom!! + insets.systemWindowInsetTop
+                //bottomMargin = marginBottom!! + ScreenUtils.getNavigationBarHeight(requireContext())
             }
-        }*/
+        }
 
-        filterAdapter.setOnItemClickCallback { v, position ->
-            selectFilter(v as FilterChipView, filterAdapter.currentList[position] as GifArgumentTag)
+        // get callback when argument changed
+        filterAdapter.setOnArgumentChangedListener {
+                arguments,
+                position,
+                isSameCategory  ->
+            filterReset.applyViewGone(arguments.isEmpty())
+            if (isSameCategory) {
+                // need to apply unselected state to last filter tag.
+                val currentItem = filterAdapter.currentList[position] as GifArgumentTag
+                applyUnselectedState(arguments[currentItem.getFilterCategory()]!!.lastPosition)
+                loge("该取消上一个tag状态了》》》》》》$position")
+            }
+
+            // respond callback to activity
+            (requireActivity() as MainActivity).onSelectedArgumentsReceived(arguments)
         }
 
         // handle click events
@@ -102,14 +119,24 @@ class GifConfigurationFragment : Fragment() {
         filterAdapter.submitArgumentList(newData)
     }
 
-    private fun selectFilter(chipView: FilterChipView, data: GifArgumentTag) {
-        val checked = !data.isChecked
-        chipView.animateCheckedAndInvoke(checked) {
-            data.isChecked = checked
+    /**
+     * Reset the state of last single tag in a category group.
+     */
+    private fun applyUnselectedState(lastIndex: Int) {
+        // reset the last selected tag data in a category group
+        (filterAdapter.currentList[lastIndex] as GifArgumentTag).isChecked = false
+        val lastSelectedChip = filterRecyclerView.getChildAt(lastIndex) as FilterChipView
+        lastSelectedChip.animateCheckedAndInvoke(false) {
         }
     }
 
+
+    /**
+     * Reset all states to unselected from tags.
+     */
     private fun resetFilterState() {
+        filterReset.applyViewGone(true)
+        filterAdapter.resetSelectedOptions()
         filterRecyclerView.forEach {child ->
             child.findViewById<FilterChipView>(R.id.filter_chip)?.let { filterView ->
                 if (filterView.isChecked) {

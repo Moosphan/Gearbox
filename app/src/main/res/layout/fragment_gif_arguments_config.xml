@@ -13,7 +13,7 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/card_z_low"
+        android:elevation="@dimen/card_z_normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,7 +28,7 @@
             android:paddingStart="@dimen/margin_normal"
             android:paddingEnd="@dimen/margin_normal"
             android:text="@string/reset"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
         android:id="@+id/filterRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/margin_normal"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"

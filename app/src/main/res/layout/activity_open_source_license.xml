@@ -31,15 +31,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:lineSpacingExtra="4dp"
                 style="@style/Widget.G2Video.TextButton"
                 android:text="@string/license_android_utils"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:lineSpacingExtra="4dp"
                 style="@style/Widget.G2Video.TextButton"
                 android:text="@string/license_permission_dispatcher"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:lineSpacingExtra="4dp"
+                style="@style/Widget.G2Video.TextButton"
+                android:text="@string/license_tap_tip"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

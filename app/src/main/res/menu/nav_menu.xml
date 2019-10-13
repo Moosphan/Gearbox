@@ -11,7 +11,7 @@
             tools:ignore="UnusedAttribute" />
         <item android:id="@+id/about"
             android:title="@string/more"
-            android:icon="@drawable/ic_more_black_24dp"
+            android:icon="@drawable/ic_more"
             android:tooltipText="@string/more"
             app:showAsAction="always"
             tools:ignore="UnusedAttribute" />

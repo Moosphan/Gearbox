@@ -6,13 +6,17 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import com.blankj.utilcode.util.FileUtils
+import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetView
+import com.moosphon.g2v.adapter.ArgumentRecord
 import com.moosphon.g2v.base.BaseActivity
 import com.moosphon.g2v.base.Configs
 import com.moosphon.g2v.dialog.LottieAnimationDialog
 import com.moosphon.g2v.engine.image.loader.ImageLoader
+import com.moosphon.g2v.model.GifArgumentTag
 import com.moosphon.g2v.ui.AboutMeActivity
 import com.moosphon.g2v.ui.GifConfigurationFragment
 import com.moosphon.g2v.ui.LocalPictureActivity
@@ -21,14 +25,21 @@ import com.moosphon.g2v.util.*
 import com.moosphon.g2v.widget.BottomSheetBehavior
 import com.otaliastudios.gif.GIFCompressor
 import com.otaliastudios.gif.GIFListener
+import com.otaliastudios.gif.strategy.DefaultStrategy
+import com.otaliastudios.gif.strategy.Strategy
+import com.otaliastudios.gif.strategy.size.AspectRatioResizer
+import com.otaliastudios.gif.strategy.size.FractionResizer
+import com.otaliastudios.gif.strategy.size.PassThroughResizer
 import com.ucard.timeory.loader.image.loader.LoadOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 import permissions.dispatcher.*
 import java.io.IOException
 
+
 /**
  * home page for app.
+ * todo: when argument is not empty, bottom sheet can be collapsed state and show arguments we choose on sheet bar.
  */
 @RuntimePermissions
 class MainActivity : BaseActivity() {
@@ -41,7 +52,14 @@ class MainActivity : BaseActivity() {
     private val mLoadingDialog: LottieAnimationDialog by lazy {
         LottieAnimationDialog(this, "loading-google-style.json")
     }
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
+    lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
+
+    private var mConfigArguments: HashMap<GifArgumentTag.GifArgumentCategory, ArgumentRecord> = HashMap()
+    private var mStrategy: Strategy? = null
+
+    private var mSpeed: Float = 1f
+    private var mRotation: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,13 +90,67 @@ class MainActivity : BaseActivity() {
                 ToastUtils.showShort("请先从本地选择一张GIF")
             } else {
                 //ToastUtils.showShort("准备将GIF转为视频格式")
-                transformGifToVideo()
+                //transformGifToVideo()
+                transformToVideo()
             }
         }
 
         // set up bottom sheet
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.gifArgumentSheet))
 
+        // set up show case guide view
+        setUpShowCaseGuide()
+
+    }
+
+    private fun setUpShowCaseGuide() {
+        if (!SPUtils.getInstance().contains(Configs.NEW_USER_CASE_DISPLAY_KEY)) {
+            SPUtils.getInstance().put(Configs.NEW_USER_CASE_DISPLAY_KEY, true)
+            TapTargetView
+                .showFor(this,
+                    TapTarget
+                        .forToolbarMenuItem(toolbar, R.id.filter, "初次见面请多指教 ◠◡◠\n", "点击这里可以自定义配置高级属性哟～")
+                        .outerCircleColor(R.color.colorPrimary)
+                        .outerCircleAlpha(0.82f)
+                        .targetCircleColor(R.color.colorAccent)
+                        .titleTextColor(R.color.textColorPrimaryLight)
+                        .descriptionTextColor(R.color.textColorPrimaryLight)
+                        .titleTextSize(20)
+                        .descriptionTextSize(18)
+                        .drawShadow(true)
+                        .targetRadius(60)
+                        .cancelable(false),
+                    object : TapTargetView.Listener() {
+                        override fun onTargetClick(view: TapTargetView?) {
+                            super.onTargetClick(view)
+                            loge("点击了引导层")
+                        }
+                    }
+                )
+        }
+
+    }
+
+    // deal with back pressed event if bottom sheet is expanded
+    override fun onBackPressed() {
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ||
+                bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+            bottomSheetBehavior.state =
+                if (bottomSheetBehavior.skipCollapsed)
+                    BottomSheetBehavior.STATE_HIDDEN
+                else BottomSheetBehavior.STATE_COLLAPSED
+        } else {
+            super.onBackPressed()
+        }
+
+    }
+
+    /**
+     * the callback when arguments changed from [GifConfigurationFragment]
+     */
+    fun onSelectedArgumentsReceived(arguments: HashMap<GifArgumentTag.GifArgumentCategory, ArgumentRecord>) {
+        loge("当前获得的参数为：${arguments.toString()}")
+        mConfigArguments = arguments
     }
 
     /**
@@ -147,6 +219,63 @@ class MainActivity : BaseActivity() {
                 displayStyle = LoadOptions.LoaderImageScaleType.CENTER_FIT
             }
             .into(gifPreview)
+    }
+
+    private fun setUpArgumentConfigs() {
+        val strategyBuilder = DefaultStrategy.Builder()
+        mConfigArguments.forEach { (category, argumentRecord) ->
+            when(category) {
+                GifArgumentTag.GifArgumentCategory.FRAME_RATE -> strategyBuilder.frameRate(
+                    argumentRecord.value.toInt()
+                )
+                GifArgumentTag.GifArgumentCategory.ASPECT_RATIO -> {
+                    val ratio = argumentRecord.value
+                    strategyBuilder.addResizer(if (ratio > 0) AspectRatioResizer(ratio) else PassThroughResizer())
+                }
+                GifArgumentTag.GifArgumentCategory.RESOLUTION -> {
+                    strategyBuilder.addResizer(FractionResizer(argumentRecord.value))
+                }
+                GifArgumentTag.GifArgumentCategory.ROTATION -> {
+                    mRotation = argumentRecord.value.toInt()
+                }
+                GifArgumentTag.GifArgumentCategory.SPEED -> {
+                    mSpeed = argumentRecord.value
+                }
+                else -> throw IllegalArgumentException("do not support this argument type")
+            }
+        }
+        mStrategy = strategyBuilder.build()
+    }
+
+    private fun transformToVideo() {
+        setUpArgumentConfigs()
+        mLoadingDialog.startLoading()
+        createVideoFile()
+        GIFCompressor.into(mVideoPath!!)
+            .setRotation(mRotation)
+            .setSpeed(mSpeed)
+            .addDataSource(this, mGifPath)
+            .setListener(object : GIFListener {
+                override fun onGIFCompressionFailed(exception: Throwable) {
+                    mLoadingDialog.cancelLoading()
+                }
+
+                override fun onGIFCompressionProgress(progress: Double) {
+                }
+
+                override fun onGIFCompressionCompleted() {
+                    mLoadingDialog.cancelLoading()
+                    ToastUtils.showShort("转换成功")
+                    navigateTo<VideoPreviewActivity>(
+                        "videoPath" to mVideoPath
+                    )
+                }
+
+                override fun onGIFCompressionCanceled() {
+                    mLoadingDialog.cancelLoading()
+                }
+
+            }).compress()
     }
 
     private fun transformGifToVideo() {

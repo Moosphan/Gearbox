@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">咚次</string>
+    <string name="app_name">Gearbox</string>
     <string name="author_name">神户</string>
     <string name="gif_to_video">GIF转视频</string>
     <string name="video_to_gif">视频转GIF</string>
@@ -14,22 +14,22 @@
     <string name="video_preview">视频预览</string>
     <string name="share_string">分享</string>
     <string name="about_me">关于我</string>
-    <string name="about_dorae">关于哆啦</string>
+    <string name="about_dorae">关于 Gearbox</string>
     <string name="about_me_desc">
         Dorae 是什么？你可以将其理解为哆啦A梦的"百宝袋"，尽管现在还太过简陋，但梦想的起点总是简单的呀≧◠◡◠≦✌️。于我而言，它代表的是一种生活态度和精神：解放大脑，提高价值生产效率，空余更多时间来专注于自己感兴趣或者更加有意义的事情。希望本应用能够在生活中帮助到你，哪怕帮您节省了一分钟的时间，那么它的价值就是非凡的。欢迎提供一些宝贵意见，只要接近了梦想，我将不遗余力。
     </string>
-    <string name="about_g2v_desc">提供图片及视频方面特殊需求的小工具。\n每天前进一小步。</string>
+    <string name="about_g2v_desc">提供图片及视频方面特殊功能的小工具，待完善…\nPeerless sword always left to the one who can wield it.</string>
     <string name="open_source_allowed">开源许可</string>
     <string name="provide_suggestion">意见反馈</string>
     <string name="develop_plan">开发计划</string>
     <string name="code_repository">代码仓库</string>
-    <string name="donation_support">友情捐赠</string>
+    <string name="donation_support">赏包辣条</string>
     <string name="contact_me">联系我</string>
     <string name="contact_me_email_info">联系我 👉 moosphon@gmail.com</string>
     <string name="develop_plan_content">
         \n
          • 优化GIF转视频的交互和页面\n
-         • 增加高级配置，实现多张GIF转换\n
+         • 实现多张GIF拼接转换\n
          • 视频转GIF图片格式\n
          • 视频区域裁剪\n
     </string>
@@ -188,6 +188,22 @@
         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
         See the License for the specific language governing permissions and
         limitations under the License.\n
+    </string>
+    <string name="license_tap_tip">
+        TapTargetView\n
+        Copyright 2016 Keepsafe Software Inc.\n
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
     </string>
 
 </resources>

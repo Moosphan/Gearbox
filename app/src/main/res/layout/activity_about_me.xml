@@ -28,14 +28,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/colorPrimary"
                 android:layout_marginTop="@dimen/margin_large"
-                android:src="@drawable/logo"/>
+                android:src="@mipmap/ic_launcher_round"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
-                style="@style/TextAppearance.Sight.NormalText"
+                style="@style/TextAppearance.Sight.CoverTitle"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/app_name"/>
             <TextView
                 android:layout_width="wrap_content"

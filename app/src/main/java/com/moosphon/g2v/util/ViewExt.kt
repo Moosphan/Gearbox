@@ -12,6 +12,8 @@ import android.view.WindowInsets
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.internal.ViewUtils.requestApplyInsetsWhenAttached
 import com.google.android.material.snackbar.Snackbar
 
@@ -90,23 +92,14 @@ fun View.padBottom(bottom: Int) {
 /**
  * help to handle window insets of view.
  */
-fun View.doOnApplyWindowInsets(block: (View, WindowInsets, Rect) -> Unit) {
-    // get initial state of padding from view
-    val initialPadding = Rect(
-        this.paddingLeft,
-        this.paddingTop,
-        this.paddingRight,
-        this.paddingBottom
-    )
-
-    // set an actual OnApplyWindowInsetsListener which proxies to the given
-    setOnApplyWindowInsetsListener { v, insets ->
-        block(v, insets, initialPadding)
+fun View.doOnApplyWindowInsets(f: (View, WindowInsetsCompat, ViewPaddingState) -> Unit) {
+    // Create a snapshot of the view's padding state
+    val paddingState = createStateForView(this)
+    ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+        f(v, insets, paddingState)
         insets
     }
-    // request insets
     requestApplyInsetsWhenAttached()
-
 }
 
 /**
@@ -116,14 +109,10 @@ fun View.doOnApplyWindowInsets(block: (View, WindowInsets, Rect) -> Unit) {
  */
 fun View.requestApplyInsetsWhenAttached() {
     if (isAttachedToWindow) {
-        // We're already attached, just request as normal
         requestApplyInsets()
     } else {
-        // We're not attached to the hierarchy, add a listener to
-        // request when we are
         addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(v: View) {
-                v.removeOnAttachStateChangeListener(this)
                 v.requestApplyInsets()
             }
 
@@ -131,6 +120,18 @@ fun View.requestApplyInsetsWhenAttached() {
         })
     }
 }
+
+private fun createStateForView(view: View) = ViewPaddingState(view.paddingLeft,
+    view.paddingTop, view.paddingRight, view.paddingBottom, view.paddingStart, view.paddingEnd)
+
+data class ViewPaddingState(
+    val left: Int,
+    val top: Int,
+    val right: Int,
+    val bottom: Int,
+    val start: Int,
+    val end: Int
+)
 
 fun View.isRtl() = layoutDirection == View.LAYOUT_DIRECTION_RTL
 

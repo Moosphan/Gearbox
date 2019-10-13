@@ -24,10 +24,10 @@
         <FrameLayout
             android:id="@+id/previewBox"
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="340dp"
             android:background="@drawable/preview_holder_shape"
             android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="124dp"
+            android:layout_marginTop="72dp"
             android:layout_marginEnd="@dimen/margin_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

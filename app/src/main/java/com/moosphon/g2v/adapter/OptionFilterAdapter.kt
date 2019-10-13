@@ -18,8 +18,11 @@ import com.moosphon.g2v.widget.FilterChipView
  */
 class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDiff) {
 
-    private var mItemClickListener:
-            ((View, Int) -> Unit)? = null       // callback of item click event
+    private var mItemClickListener:             // callback of arguments changed event
+            ((HashMap<GifArgumentTag.GifArgumentCategory, ArgumentRecord>, Int, Boolean) -> Unit)? = null
+
+    private var mSelectedArguments:             // selected argument options that we choose
+            HashMap<GifArgumentTag.GifArgumentCategory, ArgumentRecord> = HashMap()
 
     companion object {
         private const val VIEW_TYPE_CATEGORY_HEADER = R.layout.item_category_section_header
@@ -54,15 +57,6 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
         super.submitList(insertCategoryHeadings(list))
     }
 
-    // handle single checked in a category group.
-
-    /**
-     * A category group can only have one checked filter tag.
-     * e.g. We can only set fixed angle for rotation.
-     */
-    fun applySingleCheckedInCategoryGroup(category: GifArgumentTag.GifArgumentCategory) {
-
-    }
 
     fun getSpanSize(position: Int): Int {
         return if (getItem(position) is GifArgumentTag.TagFilter) 1 else 3
@@ -116,17 +110,83 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
         val chip = holder.findView<FilterChipView>(R.id.filter_chip)
         chip.text = data.getText()
         chip.color = Color.parseColor(data.getColor())
-        mItemClickListener?.let {
-            holder.itemView.setOnClickListener {
-                mItemClickListener!!(it, position)
+
+        holder.itemView.setOnClickListener {
+            selectFilter(chip, data, position)
+        }
+    }
+
+    // handle single checked in a category group.
+
+    /**
+     * toggle filter tag into selected/unselected state
+     * we should do two things in single category:
+     * 1. set new state animation
+     * 2. delivery activity to run last tag's removing animation
+     */
+    private fun selectFilter(chipView: FilterChipView, data: GifArgumentTag, position: Int) {
+        val isSame: Boolean // whether belongs to same category
+        if (!data.isChecked) {
+            if (mSelectedArguments.isNotEmpty() && mSelectedArguments.containsKey(data.getFilterCategory())) {
+                isSame = true
+                // update the latest value in a category
+                mSelectedArguments[data.getFilterCategory()]?.value = data.getValue()
+            } else {
+                isSame = false
+                mSelectedArguments[data.getFilterCategory()] = ArgumentRecord(data.getValue(), position)
             }
+            mItemClickListener?.let {
+                // Every category should have a `lastIndex`.
+                mItemClickListener?.invoke(
+                    mSelectedArguments,
+                    position,
+                    isSame
+                )
+            }
+
+            // update the last selected index in a category.
+            if (isSame) {
+                mSelectedArguments[data.getFilterCategory()]?.lastPosition = position
+            }
+
+        } else {
+            mSelectedArguments.remove(data.getFilterCategory())
+            mItemClickListener?.let {
+                // Every category should have a `lastIndex`.
+                mItemClickListener?.invoke(
+                    mSelectedArguments,
+                    position,
+                    false
+                )
+            }
+        }
+
+        // apply current new tag state
+        val checked = !data.isChecked
+        chipView.animateCheckedAndInvoke(checked) {
+            data.isChecked = checked
         }
     }
 
     /**
+     * clear all selected arguments
+     */
+    fun resetSelectedOptions() {
+        if (mSelectedArguments.isNotEmpty()) {
+            mSelectedArguments.clear()
+        }
+    }
+
+
+    /**
      * A item click event callback for rv.
      */
-    fun setOnItemClickCallback(callback: (view: View, position: Int) -> Unit) {
+    @Suppress("unused")
+    fun setOnArgumentChangedListener(
+        callback: (arguments: HashMap<GifArgumentTag.GifArgumentCategory, ArgumentRecord>,
+                   position: Int,
+                   isOld: Boolean) -> Unit) {
+
         mItemClickListener = callback
     }
 
@@ -136,6 +196,11 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
 
 
 }
+
+data class ArgumentRecord(
+    var value: Float,       // current value
+    var lastPosition: Int   // last position in single group
+)
 
 internal object ArgumentFilterDiff : DiffUtil.ItemCallback<Any>() {
     override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean = oldItem == newItem

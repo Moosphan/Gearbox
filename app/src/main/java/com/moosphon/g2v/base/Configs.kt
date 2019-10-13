@@ -16,5 +16,6 @@ object Configs {
     const val EMAIL_ADDRESS = "moosphon@gmail.com"
     const val EMAIL_DEFAULT_SUBJECT = "建议与反馈"
     const val EMAIL_DEFAULT_CONTENT = ""
+    const val NEW_USER_CASE_DISPLAY_KEY = "new_user_show_case"
 
 }
