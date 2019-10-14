@@ -49,4 +49,16 @@
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
+    <FrameLayout
+        android:id="@+id/local_image_empty_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_empty_zhihu"/>
+    </FrameLayout>
+
 </LinearLayout>

@@ -19,6 +19,7 @@ import com.moosphon.g2v.adapter.LocalImageAdapter
 import com.moosphon.g2v.base.BaseActivity
 import com.moosphon.g2v.selector.ImageMediaEntity
 import com.moosphon.g2v.selector.MediaUtils
+import com.moosphon.g2v.util.applyViewGone
 import com.moosphon.g2v.util.getColorResource
 import com.moosphon.g2v.widget.MediaItemDecoration
 import kotlinx.android.synthetic.main.activity_local_picture.*
@@ -44,6 +45,8 @@ class LocalPictureActivity : BaseActivity() {
                         val activity = mActivity.get()
                         if (activity != null){
                             if(activity.pictureData == null || activity.pictureData?.size!! == 0){
+                                activity.localPictureRecyclerView.applyViewGone(true)
+                                activity.local_image_empty_holder.applyViewGone(false)
                                 ToastUtils.showShort("本地没有GIF图片资源")
                             } else {
                                 activity.adapter.setData(activity.pictureData!!)

@@ -119,7 +119,7 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
     // handle single checked in a category group.
 
     /**
-     * toggle filter tag into selected/unselected state
+     * toggle filter tag into selected/unselected state.
      * we should do two things in single category:
      * 1. set new state animation
      * 2. delivery activity to run last tag's removing animation
@@ -143,7 +143,6 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
                     isSame
                 )
             }
-
             // update the last selected index in a category.
             if (isSame) {
                 mSelectedArguments[data.getFilterCategory()]?.lastPosition = position
@@ -168,6 +167,7 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
         }
     }
 
+
     /**
      * clear all selected arguments
      */
@@ -185,7 +185,7 @@ class OptionFilterAdapter : ListAdapter<Any, CommonViewHolder>(ArgumentFilterDif
     fun setOnArgumentChangedListener(
         callback: (arguments: HashMap<GifArgumentTag.GifArgumentCategory, ArgumentRecord>,
                    position: Int,
-                   isOld: Boolean) -> Unit) {
+                   isSame: Boolean) -> Unit) {
 
         mItemClickListener = callback
     }

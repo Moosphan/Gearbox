@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import androidx.core.view.forEach
 import androidx.core.view.marginBottom
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePaddingRelative
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.moosphon.g2v.MainActivity
 import com.moosphon.g2v.R
 import com.moosphon.g2v.adapter.OptionFilterAdapter
 import com.moosphon.g2v.adapter.OptionFilterSpanSizeLookup
 import com.moosphon.g2v.model.GifArgumentTag
-import com.moosphon.g2v.model.Tag
 import com.moosphon.g2v.model.data.GifArgumentTagDataSource
 import com.moosphon.g2v.util.*
 import com.moosphon.g2v.widget.BottomSheetBehavior
@@ -23,7 +24,6 @@ import com.moosphon.g2v.widget.BottomSheetBehavior.Companion.STATE_COLLAPSED
 import com.moosphon.g2v.widget.BottomSheetBehavior.Companion.STATE_HIDDEN
 import com.moosphon.g2v.widget.FilterChipView
 import kotlinx.android.synthetic.main.fragment_gif_arguments_config.*
-import kotlin.math.log
 
 /**
  * Fragment to display gif configuration arguments like a bottom sheet dialog.
@@ -43,44 +43,44 @@ class GifConfigurationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_gif_arguments_config, container, false)
     }
 
-    @SuppressLint("NewApi")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.setOnApplyWindowInsetsListener { v, insets ->
+            // During fragment transitions, multiple fragment's view hierarchies can be added at the
+            // same time. If one consumes window insets, the other might not be layed out properly.
+            // To workaround that, make sure we dispatch the insets to all children, regardless of
+            // how they are consumed.
+            (v as? ViewGroup)?.forEach { child ->
+                child.dispatchApplyWindowInsets(insets)
+            }
+            insets
+        }
 
         filterRecyclerView.apply {
             adapter = filterAdapter
             setHasFixedSize(true)
             (layoutManager as GridLayoutManager).spanSizeLookup =
                 OptionFilterSpanSizeLookup(filterAdapter)
+
+            // when scroll from bottom -> top, header should change state.
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    topBar.isActivated = recyclerView.canScrollVertically(-1)
+                }
+            })
+            // if this device has navigation bar,
+            // we should reserve space to display bottom sheet well when expanded.
+            // So, we pad the bottom of the RecyclerView so that the content scrolls up above the nav bar
+            updatePaddingRelative(
+                bottom = paddingBottom + ScreenUtils.getNavigationBarHeight(requireContext())
+            )
         }
 
-
-        // todo: 访问父activity的view层的时候需要在 onActivityCreated 方法里面,，为何filterSheetContainer为空？
-        /*view?.let { parent ->
-            behavior = BottomSheetBehavior.from(parent.findViewById(R.id.filterSheetContainer))
-        }*/
-
-        // Update the peek and margins so that it scrolls and rests within sys ui
-        behavior = (requireActivity() as MainActivity).bottomSheetBehavior
-        behavior.state = STATE_HIDDEN
-        val peekHeight = behavior.peekHeight
-        val marginBottom = view?.marginBottom
-
-        view?.doOnApplyWindowInsets { v, insets, _ ->
-            val gestureInsets = insets.systemGestureInsets
-            // Update the peek height so that it is above the navigation bar
-            behavior.peekHeight = gestureInsets.bottom + peekHeight
-
-            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = marginBottom!! + insets.systemWindowInsetTop
-                //bottomMargin = marginBottom!! + ScreenUtils.getNavigationBarHeight(requireContext())
-            }
-        }
-
-        // get callback when argument changed
+        // get callback when argument changed.
         filterAdapter.setOnArgumentChangedListener {
                 arguments,
                 position,
@@ -90,7 +90,6 @@ class GifConfigurationFragment : Fragment() {
                 // need to apply unselected state to last filter tag.
                 val currentItem = filterAdapter.currentList[position] as GifArgumentTag
                 applyUnselectedState(arguments[currentItem.getFilterCategory()]!!.lastPosition)
-                loge("该取消上一个tag状态了》》》》》》$position")
             }
 
             // respond callback to activity
@@ -109,6 +108,38 @@ class GifConfigurationFragment : Fragment() {
         loadTags()
     }
 
+    @SuppressLint("NewApi")
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // todo: 访问父activity的view层的时候需要在 onActivityCreated 方法里面,，为何filterSheetContainer为空？
+        /*view?.let { parent ->
+            behavior = BottomSheetBehavior.from(parent.findViewById(R.id.filterSheetContainer))
+        }*/
+
+        // because of behavior is from activity, so we should get it after activity created.
+        behavior = (requireActivity() as MainActivity).bottomSheetBehavior
+        behavior.state = STATE_HIDDEN
+        val peekHeight = behavior.peekHeight
+        val marginBottom = view?.marginBottom
+        // Update the peek and margins so that it scrolls and rests within sys ui
+        // todo: why not worked? did not arrived here
+        view?.doOnApplyWindowInsets { v, insets, _ ->
+            val gestureInsets = insets.systemGestureInsets
+            // Update the peek height so that it is above the navigation bar
+            behavior.peekHeight = gestureInsets.bottom + peekHeight
+
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = marginBottom!! + insets.systemWindowInsetTop
+            }
+        }
+
+
+    }
+
+    /**
+     * load argument data from repository.
+     */
     private fun loadTags() {
         val data = GifArgumentTagDataSource.loadArgumentData(requireContext())
         val newData = ArrayList<GifArgumentTag.TagFilter>()
@@ -150,7 +181,6 @@ class GifConfigurationFragment : Fragment() {
                 }
             }
         }
-
     }
 
 }

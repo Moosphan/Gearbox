@@ -6,8 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_vertical|start"
     android:minHeight="?actionBarSize"
-    android:paddingStart="@dimen/spacing_normal"
-    android:paddingEnd="@dimen/spacing_normal"
     android:textAppearance="@style/TextAppearance.Sight.NormalText"
     tools:text="旋转角度">
 

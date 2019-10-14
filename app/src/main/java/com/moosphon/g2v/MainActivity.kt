@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.ViewGroup
+import androidx.core.view.forEach
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -32,14 +34,19 @@ import com.otaliastudios.gif.strategy.size.FractionResizer
 import com.otaliastudios.gif.strategy.size.PassThroughResizer
 import com.ucard.timeory.loader.image.loader.LoadOptions
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.contentView
 import org.jetbrains.anko.intentFor
 import permissions.dispatcher.*
 import java.io.IOException
 
 
 /**
- * home page for app.
- * todo: when argument is not empty, bottom sheet can be collapsed state and show arguments we choose on sheet bar.
+ * Gif editor page to output video file.
+ * todo:
+ * 1. when argument is not empty, bottom sheet can be collapsed state and show arguments we choose on sheet bar.
+ * 2. proguard support
+ * 3. refactor the code by dataBinding.
+ *
  */
 @RuntimePermissions
 class MainActivity : BaseActivity() {
@@ -66,11 +73,15 @@ class MainActivity : BaseActivity() {
         setTheme(R.style.G2VideoTheme)
         ScreenUtils.applyStatusBarStyle(this)
         setContentView(R.layout.activity_main)
+        initView()
         initializeWithPermissionCheck()
     }
 
-    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    fun initialize() {
+    private fun initView() {
+        // set up bottom sheet
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.gifArgumentSheet))
+
+        // set up toolbar
         toolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.about  -> navigateTo<AboutMeActivity>()
@@ -95,11 +106,22 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        // set up bottom sheet
-        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.gifArgumentSheet))
+        gifPreview.setOnClickListener {
+            if (mGifPath.isNotEmpty()) {
+                startActivityForResult(
+                    intentFor<LocalPictureActivity>(),
+                    RC_GIF_BEHAVIOR
+                )
+            }
+        }
 
         // set up show case guide view
         setUpShowCaseGuide()
+    }
+
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun initialize() {
+
 
     }
 
@@ -199,6 +221,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    // update ui when returns gif file.
     private fun updateUI() {
         val shapeDrawable = gif2VideoBtn.background as GradientDrawable
         shapeDrawable.setColor(getColorResource(R.color.colorPrimary))
@@ -210,6 +233,7 @@ class MainActivity : BaseActivity() {
 
     }
 
+    // load gif file on screen
     private fun displayGif() {
         ImageLoader.INSTANCE
             .with {
@@ -221,6 +245,9 @@ class MainActivity : BaseActivity() {
             .into(gifPreview)
     }
 
+    /**
+     * Set up arguments for output configs.
+     */
     private fun setUpArgumentConfigs() {
         val strategyBuilder = DefaultStrategy.Builder()
         mConfigArguments.forEach { (category, argumentRecord) ->
@@ -247,6 +274,7 @@ class MainActivity : BaseActivity() {
         mStrategy = strategyBuilder.build()
     }
 
+    /** Transform gif file to video format. */
     private fun transformToVideo() {
         setUpArgumentConfigs()
         mLoadingDialog.startLoading()
@@ -278,34 +306,8 @@ class MainActivity : BaseActivity() {
             }).compress()
     }
 
-    private fun transformGifToVideo() {
-        mLoadingDialog.startLoading()
-        createVideoFile()
-        GIFCompressor.into(mVideoPath!!)
-            .addDataSource(this, mGifPath)
-            .setListener(object : GIFListener {
-                override fun onGIFCompressionFailed(exception: Throwable) {
-                    mLoadingDialog.cancelLoading()
-                }
 
-                override fun onGIFCompressionProgress(progress: Double) {
-                }
-
-                override fun onGIFCompressionCompleted() {
-                    mLoadingDialog.cancelLoading()
-                    ToastUtils.showShort("转换成功")
-                    navigateTo<VideoPreviewActivity>(
-                        "videoPath" to mVideoPath
-                    )
-                }
-
-                override fun onGIFCompressionCanceled() {
-                    mLoadingDialog.cancelLoading()
-                }
-
-            }).compress()
-    }
-
+    /** Generate a video file path */
     private fun createVideoFile() {
         val filePath = Configs.APP_DIR + Configs.VIDEO_DIR + System.currentTimeMillis().toString() + ".mp4"
         try {

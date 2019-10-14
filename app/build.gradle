@@ -24,7 +24,28 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    //去除资源合法性检测
+    compileOptions {
+        incremental = false
+    }
+
+    //签名配置
+    signingConfigs {
+        debug {
+            storeFile file('/Users/moos/github/G2Video/gearbox_keystore.jks')
+            storePassword "android"
+            storeType = "jks"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
         }
     }
 

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Gearbox</string>
-    <string name="author_name">神户</string>
+    <string name="author_name">神护</string>
     <string name="gif_to_video">GIF转视频</string>
     <string name="video_to_gif">视频转GIF</string>
     <string name="change_gif">更换GIF</string>
@@ -16,7 +16,7 @@
     <string name="about_me">关于我</string>
     <string name="about_dorae">关于 Gearbox</string>
     <string name="about_me_desc">
-        Dorae 是什么？你可以将其理解为哆啦A梦的"百宝袋"，尽管现在还太过简陋，但梦想的起点总是简单的呀≧◠◡◠≦✌️。于我而言，它代表的是一种生活态度和精神：解放大脑，提高价值生产效率，空余更多时间来专注于自己感兴趣或者更加有意义的事情。希望本应用能够在生活中帮助到你，哪怕帮您节省了一分钟的时间，那么它的价值就是非凡的。欢迎提供一些宝贵意见，只要接近了梦想，我将不遗余力。
+        Gearbox 是什么？它问世的初衷就是提供多种奇葩、怪异功能的工具集，尽管现在还太过简陋，但梦想的起点总是简单的呀≧◠◡◠≦✌️。于我而言，它代表的是一种生活态度和精神：解放大脑，提高价值生产效率，空余更多时间来专注于自己感兴趣或者更加有意义的事情。希望本应用能够在生活中帮助到你，哪怕帮您节省了一分钟的时间，那么它的价值就是非凡的。欢迎提供一些宝贵意见，只要接近了梦想，我将不遗余力。
     </string>
     <string name="about_g2v_desc">提供图片及视频方面特殊功能的小工具，待完善…\nPeerless sword always left to the one who can wield it.</string>
     <string name="open_source_allowed">开源许可</string>

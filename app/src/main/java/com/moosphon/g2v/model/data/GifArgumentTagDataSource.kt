@@ -186,7 +186,7 @@ object GifArgumentTagDataSource {
     }
 
     private fun parseJsonData(jsonString: String): TagList {
-        loge("获取的本地json数据：$jsonString")
+        //loge("获取的本地json数据：$jsonString")
         val gson = Gson()
         return gson.fromJson(jsonString, TagList::class.java)
     }
