@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="https://github.com/Moosphan/Gearbox" target="_blank">
+	  <img src="https://raw.githubusercontent.com/Moosphan/Gearbox/master/art/LOGO.png" width="120" height="120"/>
+  </a>
+</p>
+
+
+
 # Gearbox
 
 A tools app to transform GIF or video files to each other.
