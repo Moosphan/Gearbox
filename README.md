@@ -10,7 +10,7 @@
 
 A tools app to transform GIF or video files to each other.
 
-We'll see o n Google play soon...
+We'll see on Google play soon...
 
 ### Todo
 
