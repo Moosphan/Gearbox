@@ -1,7 +1,6 @@
 package com.moosphon.g2v.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,11 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ToastUtils
 import com.moosphon.g2v.R
 import com.moosphon.g2v.engine.image.loader.ImageLoader
 import com.moosphon.g2v.selector.ImageMediaEntity
-import com.moosphon.g2v.widget.MultiMediaCheckView
-
 import com.ucard.timeory.loader.image.loader.LoadOptions
-import org.jetbrains.anko.find
+
 
 /**
  * <pre>
@@ -43,9 +39,9 @@ class LocalImageAdapter: RecyclerView.Adapter<LocalImageAdapter.LocalCoverViewHo
     }
 
     override fun onBindViewHolder(holder: LocalCoverViewHolder, position: Int) {
-        val thumbnailImage: ImageView = holder.view.find(R.id.local_video_item_thumbnail)
-        val checkBox: CheckBox = holder.view.find(R.id.local_video_item_cb)
-        val container: RelativeLayout = holder.view.find(R.id.local_video_item_container)
+        val thumbnailImage: ImageView = holder.view.findViewById(R.id.local_video_item_thumbnail)
+        val checkBox: CheckBox = holder.view.findViewById(R.id.local_video_item_cb)
+        val container: RelativeLayout = holder.view.findViewById(R.id.local_video_item_container)
         checkBox.isChecked = checkState.contains(position)
         ImageLoader
             .INSTANCE

@@ -10,7 +10,6 @@ import androidx.annotation.StyleRes
 import com.airbnb.lottie.LottieAnimationView
 import com.moosphon.g2v.R
 import com.moosphon.g2v.util.applyViewGone
-import org.jetbrains.anko.find
 
 /**
  * @author moosphon
@@ -44,8 +43,8 @@ class LottieAnimationDialog(context: Context, @StyleRes theme: Int) : Dialog(con
     }
 
     private fun initView(){
-        animateView = find(R.id.dialog_lottie_animView)
-        animateText = find(R.id.dialog_lottie_tip_text)
+        animateView = findViewById(R.id.dialog_lottie_animView)
+        animateText = findViewById(R.id.dialog_lottie_tip_text)
         animateView?.setAnimation(animResource)
         animateView?.loop(isLoop)
         setOnDismissListener {

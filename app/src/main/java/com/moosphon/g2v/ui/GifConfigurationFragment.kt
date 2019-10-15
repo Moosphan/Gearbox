@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.forEach
-import androidx.core.view.marginBottom
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePaddingRelative
+import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +57,7 @@ class GifConfigurationFragment : Fragment() {
             insets
         }
 
+
         filterRecyclerView.apply {
             adapter = filterAdapter
             setHasFixedSize(true)
@@ -85,6 +83,7 @@ class GifConfigurationFragment : Fragment() {
                 arguments,
                 position,
                 isSameCategory  ->
+            loge("点击了tag")
             filterReset.applyViewGone(arguments.isEmpty())
             if (isSameCategory) {
                 // need to apply unselected state to last filter tag.
@@ -95,6 +94,8 @@ class GifConfigurationFragment : Fragment() {
             // respond callback to activity
             (requireActivity() as MainActivity).onSelectedArgumentsReceived(arguments)
         }
+        // first state should gone
+        filterReset.applyViewGone(true)
 
         // handle click events
         filterClose.setOnClickListener {
@@ -120,10 +121,13 @@ class GifConfigurationFragment : Fragment() {
         // because of behavior is from activity, so we should get it after activity created.
         behavior = (requireActivity() as MainActivity).bottomSheetBehavior
         behavior.state = STATE_HIDDEN
+
+        // this has ability of spring back.
+        //behavior.skipCollapsed = false
         val peekHeight = behavior.peekHeight
         val marginBottom = view?.marginBottom
         // Update the peek and margins so that it scrolls and rests within sys ui
-        // todo: why not worked? did not arrived here
+        // todo: why not worked? did not arrived here 👉 I should learn source code about windowInsets consumed process.
         view?.doOnApplyWindowInsets { v, insets, _ ->
             val gestureInsets = insets.systemGestureInsets
             // Update the peek height so that it is above the navigation bar
@@ -133,7 +137,6 @@ class GifConfigurationFragment : Fragment() {
                 bottomMargin = marginBottom!! + insets.systemWindowInsetTop
             }
         }
-
 
     }
 

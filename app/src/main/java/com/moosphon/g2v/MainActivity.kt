@@ -6,8 +6,6 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.ViewGroup
-import androidx.core.view.forEach
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -34,8 +32,6 @@ import com.otaliastudios.gif.strategy.size.FractionResizer
 import com.otaliastudios.gif.strategy.size.PassThroughResizer
 import com.ucard.timeory.loader.image.loader.LoadOptions
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.contentView
-import org.jetbrains.anko.intentFor
 import permissions.dispatcher.*
 import java.io.IOException
 
@@ -92,7 +88,7 @@ class MainActivity : BaseActivity() {
 
         selectBtn.setOnClickListener {
             startActivityForResult(
-                intentFor<LocalPictureActivity>(),
+                intentTo<LocalPictureActivity>(),
                 RC_GIF_BEHAVIOR
             )
         }
@@ -109,7 +105,7 @@ class MainActivity : BaseActivity() {
         gifPreview.setOnClickListener {
             if (mGifPath.isNotEmpty()) {
                 startActivityForResult(
-                    intentFor<LocalPictureActivity>(),
+                    intentTo<LocalPictureActivity>(),
                     RC_GIF_BEHAVIOR
                 )
             }
@@ -145,7 +141,6 @@ class MainActivity : BaseActivity() {
                     object : TapTargetView.Listener() {
                         override fun onTargetClick(view: TapTargetView?) {
                             super.onTargetClick(view)
-                            loge("点击了引导层")
                         }
                     }
                 )

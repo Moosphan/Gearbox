@@ -13,7 +13,6 @@ import com.moosphon.g2v.R
 import com.moosphon.g2v.engine.image.loader.ImageLoader
 import com.moosphon.g2v.selector.VideoMediaEntity
 import com.ucard.timeory.loader.image.loader.LoadOptions
-import org.jetbrains.anko.find
 
 /**
  * <pre>
@@ -40,10 +39,10 @@ class LocalVideoAdapter: RecyclerView.Adapter<LocalVideoAdapter.LocalVideoViewHo
     }
 
     override fun onBindViewHolder(holder: LocalVideoViewHolder, position: Int) {
-        val thumbnailImage: ImageView = holder.view.find(R.id.local_video_item_thumbnail)
-        val checkBox: CheckBox = holder.view.find(R.id.local_video_item_cb)
-        val container: RelativeLayout = holder.view.find(R.id.local_video_item_container)
-        val durationText: TextView = holder.view.find(R.id.local_video_item_duration)
+        val thumbnailImage: ImageView = holder.view.findViewById(R.id.local_video_item_thumbnail)
+        val checkBox: CheckBox = holder.view.findViewById(R.id.local_video_item_cb)
+        val container: RelativeLayout = holder.view.findViewById(R.id.local_video_item_container)
+        val durationText: TextView = holder.view.findViewById(R.id.local_video_item_duration)
         checkBox.isChecked = checkState.contains(position)
         durationText.text = data[position].duration
 
